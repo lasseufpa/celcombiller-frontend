@@ -1,0 +1,62 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.title}}</h1>
+  </div>
+  <div class="row">
+    <md-content layout-gt-sm="row" layout-padding>
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Credito de voz (em minutos)</label>
+        <input type="number" ng-model="vm.vvoice" aria-label="amount">
+      </md-input-container>
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Credito de Dados (em KB)</label>
+        <input type="number" ng-model="vm.vdata" aria-label="amount">
+        <br>
+      </md-input-container>
+    </md-content>
+  </div>
+  <div class="row">
+    <md-table-container>
+      <table md-table md-progress="vm.promise">
+        <thead md-head md-order="mdorder">
+          <th md-column md-order-by="_id ">User Id</th>
+          <th md-column md-order-by="name"><span>User Name</span></th>
+          <th md-column><span>User Voice Balance</span></th>
+          <th md-column md-numeric><span>User Data Balance</span></th>
+          <th md-column><span>Add Voice Balance</span></th>
+          <th md-column><span>Add Data Balance</span></th>
+        </thead>
+        <tbody md-body>
+          <tr md-row ng-repeat="item in vm.array | orderBy: mdorder">
+            <td md-cell>{{item._id}}</td>
+            <td md-cell>{{item.name}}</td>
+            <td md-cell ng-if="item.voice_balance < 119 ">{{item.voice_balance |number:2}} Seg.</td>
+            <td md-cell ng-if="(item.voice_balance >= 120 ) && (item.voice_balance < 7199 )">{{item.voice_balance/60 |number:2}} Min.</td>
+            <td md-cell ng-if="item.voice_balance  >= 7200 ">{{item.voice_balance/3600 |number:2}} Horas</td>
+
+
+
+
+            <td md-cell ng-if="item.data_balance  < 2047 " >{{item.data_balance | number:4}} B</td>
+
+              <td md-cell ng-if="(item.data_balance  >= 2048 ) && (item.data_balance  < 2097151) " >{{item.data_balance/1024 | number:4}} KB</td>
+
+
+              <td md-cell ng-if=" item.data_balance >= 2097152 " >{{item.data_balance/1048576 | number:4}} MB</td>
+
+            <td md-cell>
+              <md-button class="md-fab md-mini md-primary" aria-label="Voice" ng-click="vm.increaseVoice(item._id)"> + </md-button>
+            </td>
+            <td md-cell>
+              <md-button class="md-fab md-mini md-primary" aria-label="Data" ng-click="vm.increaseData(item._id)"> + </md-button>
+            </td>
+
+
+
+
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </div>
+</section>

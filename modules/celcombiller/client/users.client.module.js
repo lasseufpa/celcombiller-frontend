@@ -2,6 +2,7 @@
   'use strict';
 
   app.registerModule('celcombiller');
+  app.registerModule('celcombiller.basic');
   app.registerModule('celcombiller.admin');
   app.registerModule('celcombiller.admin.routes', ['ui.router', 'core.routes', 'users.admin.services']);
   app.registerModule('celcombiller.admin.services');

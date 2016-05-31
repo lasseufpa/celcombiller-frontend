@@ -91,6 +91,16 @@
           roles: ['user', 'admin']
         }
       })
+      .state('basic', {
+        url: '/basic',
+        templateUrl: 'modules/celcombiller/client/views/basic.client.view.html',
+        controller: 'BasicController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Basic',
+
+        }
+      })
 
 ;
 /*

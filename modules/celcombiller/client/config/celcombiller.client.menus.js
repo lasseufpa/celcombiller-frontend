@@ -9,6 +9,13 @@
 
   // Configuring the Users module
   function menuConfig(menuService) {
+
+    menuService.addMenuItem('topbar', {
+      title: 'Basic',
+      state: 'basic',
+
+    });
+
     menuService.addMenuItem('topbar', {
       title: 'Cadastrar',
       state: 'register',
@@ -24,7 +31,7 @@
       title: 'Adição Manual',
       state: 'credit.manual'
     });
-  menuService.addSubMenuItem('topbar', 'credit', {
+    menuService.addSubMenuItem('topbar', 'credit', {
       title: 'Adição por Agendamento',
       state: 'credit.schedule '
     });
