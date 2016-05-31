@@ -94,7 +94,7 @@
     "gulp-autoprefixer": "~3.1.0",
     "gulp-concat": "~2.6.0",
     "gulp-csslint": "~0.2.0",
-    "gulp-cssmin": "~0.1.7",
+    "gulp-csso": "~1.1.0",
     "gulp-eslint": "~2.0.0",
     "gulp-imagemin": "~2.4.0",
     "gulp-less": "~3.0.5",
@@ -122,7 +122,6 @@
     "node-inspector": "~0.12.7",
     "run-sequence": "~1.1.5",
     "should": "~8.2.2",
-    "supertest": "~1.2.0",
-    "yargs": "~3.32.0"
+    "supertest": "~1.2.0"
   }
 }

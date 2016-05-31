@@ -1,11 +1,14 @@
 # Build:
-# docker build -t lirantal/meanjs .
+# docker build -t meanjs/mean .
 #
 # Run:
-# docker run -it lirantal/meanjs
+# docker run -it meanjs/mean
+#
+# Compose:
+# docker-compose up -d
 
 FROM ubuntu:latest
-MAINTAINER Liran Tal <liran.tal@gmail.com>
+MAINTAINER MEAN.JS
 
 # Install Utilities
 RUN apt-get update -q
@@ -30,12 +33,13 @@ WORKDIR /opt/mean.js
 # and utilities docker container cache to not needing to rebuild
 # and install node_modules/ everytime we build the docker, but only
 # when the local package.json file changes.
+# Install npm packages
 ADD package.json /opt/mean.js/package.json
+RUN npm install --quiet
+
+# Install bower packages
 ADD bower.json /opt/mean.js/bower.json
 ADD .bowerrc /opt/mean.js/.bowerrc
-
-# Install MEAN.JS packages
-RUN npm install --quiet
 RUN bower install --quiet --allow-root --config.interactive=false
 
 # Share local directory on the docker container
