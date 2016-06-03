@@ -4,8 +4,13 @@
   </div>
   <div class="row">
     <md-content layout-gt-sm="row" layout-padding>
-      <md-button class="md-fab md-mini md-primary" aria-label="Voice" ng-click=""> + </md-button>
-      </td>
+<!--       <md-button class="md-fab md-mini md-primary" aria-label="Voice" ng-click="vm.test()"> + </md-button> -->
+
+<md-button class="md-primary md-raised md-mini" ng-click="vm.showDialog()">
+      Adicionar credito
+    </md-button>
+
+
       <md-input-container class="md-block" flex-gt-sm>
         <label>Filtro</label>
         <input type="string" ng-model="vm.vfilter" aria-label="amount">
@@ -15,7 +20,7 @@
   </div>
   <div class="row">
     <md-table-container>
-      <table md-table md-row-select    md-progress="vm.promise" ng-model="vm.selected">
+      <table md-table md-row-select multiple   md-progress="vm.promise" ng-model="vm.selected">
         <thead md-head md-order="mdorder">
           <th md-column md-order-by="_id "><span>User Id</span></th>
           <th md-column md-order-by="name"><span>User Name</span></th>
@@ -26,7 +31,7 @@
           <th md-column><span>Add Data Balance</span></th> -->
         </thead>
         <tbody md-body>
-          <tr md-row md-select="vm.selected" md-auto-select   ng-repeat="item in vm.filteredItems  | filter:vm.filter | orderBy: mdorder" >
+          <tr md-row md-select="item._id" md-auto-select ng-model="vm.selected"   ng-repeat="item in vm.filteredItems  | filter:vm.filter | orderBy: mdorder" >
             <td md-cell>{{item._id}}</td>
             <td md-cell>{{item.name}}</td>
             <td md-cell>{{item.clid}}</td>

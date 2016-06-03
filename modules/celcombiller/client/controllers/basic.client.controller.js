@@ -5,9 +5,10 @@
     .module('celcombiller.basic')
     .controller('BasicController', BasicController);
 
-  BasicController.$inject = ['UserAccessService', 'DataBalanceAccessService', 'VoiceBalanceAccessService', '$timeout', '$filter'];
+  BasicController.$inject = ['UserAccessService', 'DataBalanceAccessService', 'VoiceBalanceAccessService', '$timeout', '$mdDialog'];
 
-  function BasicController(UserAccessService, DataBalanceAccessService, VoiceBalanceAccessService, $timeout, $filter) {
+  function BasicController(UserAccessService, DataBalanceAccessService, VoiceBalanceAccessService, $timeout, $mdDialog) {
+
     var vm = this;
 
     vm.title = "Basic0";
@@ -24,14 +25,6 @@
       vm.array = vm.filteredItems = data.objects;
     }).$promise;
 
-    vm.test = "1";
-    // $timeout(function() {
-    //   // vm.array = data.objects;
-    //   vm.test = "nada";
-    //   console.log(vm.test);
-    //   console.log(vm.array);
-
-    // }, 0, false);
 
     function increaseVoice(_id) {
       var balance = new VoiceBalanceAccessService();
