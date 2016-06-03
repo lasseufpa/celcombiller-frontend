@@ -5,34 +5,64 @@
     .module('celcombiller.basic')
     .controller('BasicController', BasicController);
 
-  BasicController.$inject = ['UserAccessService', 'DataBalanceAccessService', 'VoiceBalanceAccessService'];
+  BasicController.$inject = ['UserAccessService', 'DataBalanceAccessService', 'VoiceBalanceAccessService', '$timeout', '$filter'];
 
-
-
-  function BasicController(UserAccessService, DataBalanceAccessService, VoiceBalanceAccessService) {
+  function BasicController(UserAccessService, DataBalanceAccessService, VoiceBalanceAccessService, $timeout, $filter) {
     var vm = this;
 
     vm.title = "Basic0";
     vm.vvoice = 60;
-    vm.vdata = 1024;
+    vm.vfilter = "";
+    vm.array = null;
+    vm.increaseVoice = increaseVoice;
+    vm.increaseData = increaseData;
+    vm.filter = filter;
+    vm.selected = [];
 
-    var n = 0
 
     vm.promise = UserAccessService.query(function(data) {
-      vm.array = data.objects;
-      console.log(vm.array);
+      vm.array = vm.filteredItems = data.objects;
     }).$promise;
 
+    vm.test = "1";
+    // $timeout(function() {
+    //   // vm.array = data.objects;
+    //   vm.test = "nada";
+    //   console.log(vm.test);
+    //   console.log(vm.array);
 
+    // }, 0, false);
 
+    function increaseVoice(_id) {
+      var balance = new VoiceBalanceAccessService();
+      balance.from_user_id = _id;
+      balance.value = vm.vvoice * 60;
+      balance.origin = "web";
 
-    vm.increaseVoice = function(_id) {
-      var test2 = new VoiceBalanceAccessService();
-      test2.from_user_id = _id;
-      test2.value =  vm.vvoice * 60;
-      test2.origin = "web";
+      balance.$save(function(resp, headers) {
+          //success callback
+          vm.promise = UserAccessService.query(function(data) {
+            vm.array = data.objects;
 
-      test2.$save(function(resp, headers) {
+          }).$promise;
+        },
+        function(err) {
+          UserAccessService.query(function(data) {
+            vm.array = data.objects;
+
+          });
+          // error callback
+          console.log(err);
+        });
+    }
+
+    function increaseData(_id) {
+      var balance = new DataBalanceAccessService();
+      balance.user_id = _id;
+      balance.value = vm.vfilter * 1024;
+      balance.origin = "web";
+
+      balance.$save(function(resp, headers) {
           //success callback
           vm.promise = UserAccessService.query(function(data) {
             vm.array = data.objects;
@@ -49,27 +79,18 @@
     }
 
 
-    vm.increaseData = function(_id) {
-      var test2 = new DataBalanceAccessService();
-      test2.user_id = _id;
-      test2.value = vm.vdata * 1024 ;
-      test2.origin = "web";
+    function filter(item) {
 
-      test2.$save(function(resp, headers) {
-          //success callback
-          vm.promise = UserAccessService.query(function(data) {
-            vm.array = data.objects;
-
-          }).$promise;
-        },
-        function(err) {
-          UserAccessService.query(function(data) {
-            vm.array = data.objects;
-          });
-          // error callback
-          console.log(err);
-        });
+      if ((String(item._id).indexOf(vm.vfilter) >= 0) ||
+        (String(item.name).indexOf(vm.vfilter) >= 0) ||
+        (String(item.clid).indexOf(vm.vfilter) >= 0)) {
+        return 1;
+      } else {
+        return 0;
+      }
     }
+
+
 
   }
 }());
