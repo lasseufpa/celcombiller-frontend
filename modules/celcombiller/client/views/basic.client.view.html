@@ -3,24 +3,27 @@
     <h1>{{vm.title}}</h1>
   </div>
   <div class="row">
-    <md-content layout-gt-sm="row" layout-padding>
-<!--       <md-button class="md-fab md-mini md-primary" aria-label="Voice" ng-click="vm.test()"> + </md-button> -->
 
-<md-button class="md-primary md-raised md-mini" ng-click="vm.showDialog()">
-      Adicionar credito
-    </md-button>
+      <md-content layout-gt-sm="row" layout-padding>
+        <!--       <md-button class="md-fab md-mini md-primary" aria-label="Voice" ng-click="vm.test()"> + </md-button> -->
+        <md-input-container class="md-block" flex-gt-sm>
+          <md-button class="md-primary md-raised md-mini" ng-click="vm.showDialog($event)" >
+            Adicionar credito
+          </md-button>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Filtro</label>
+          <input  name="name" type="string" ng-model="vm.vfilter" aria-label="amount">
+          <div  required ng-messages="name.$error" role="alert" ng-if="true" >
+            <div ng-message="required">You did not enter a field</div>
+          </div>
+        </md-input-container>
+      </md-content>
 
-
-      <md-input-container class="md-block" flex-gt-sm>
-        <label>Filtro</label>
-        <input type="string" ng-model="vm.vfilter" aria-label="amount">
-        <br>
-      </md-input-container>
-    </md-content>
   </div>
   <div class="row">
     <md-table-container>
-      <table md-table md-row-select multiple   md-progress="vm.promise" ng-model="vm.selected">
+      <table md-table md-row-select multiple md-progress="vm.promise" ng-model="vm.selected">
         <thead md-head md-order="mdorder">
           <th md-column md-order-by="_id "><span>User Id</span></th>
           <th md-column md-order-by="name"><span>User Name</span></th>

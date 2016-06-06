@@ -5,9 +5,9 @@
     .module('celcombiller.basic')
     .controller('BasicController', BasicController);
 
-  BasicController.$inject = ['UserAccessService', 'DataBalanceAccessService', 'VoiceBalanceAccessService', '$timeout', '$mdDialog'];
+  BasicController.$inject = ['UserAccessService', 'DataBalanceAccessService', 'VoiceBalanceAccessService', '$timeout', '$mdDialog', '$mdMedia'];
 
-  function BasicController(UserAccessService, DataBalanceAccessService, VoiceBalanceAccessService, $timeout, $mdDialog) {
+  function BasicController(UserAccessService, DataBalanceAccessService, VoiceBalanceAccessService, $timeout, $mdDialog, $mdMedia) {
 
     var vm = this;
 
@@ -82,6 +82,45 @@
         return 0;
       }
     }
+
+
+
+
+    vm.showDialog = function(ev) {
+      var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && vm.customFullscreen;
+      console.log($mdMedia('sm'))
+      if (vm.selected.length != 0) {
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: 'modules/celcombiller/client/views/basic-dialog.client.view.html',
+          parent: angular.element(document.body),
+          clickOutsideToClose: true,
+          fullscreen: true,
+          targetEvent: ev
+
+        });
+      } else { console.log("vazio"); }
+    };
+
+
+
+    function DialogController($scope, $mdDialog) {
+
+      console.log(vm.array[name])
+
+      $scope.selected = vm.selected;
+      $scope.hide = function() {
+        $mdDialog.hide();
+      };
+      $scope.cancel = function() {
+        $mdDialog.cancel();
+      };
+      $scope.answer = function(answer) {
+        console.log("2");
+        $mdDialog.hide(answer);
+      };
+    }
+
 
 
 
