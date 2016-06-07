@@ -1,0 +1,92 @@
+<div layout="column" ng-cloak class="md-inline-form">
+  <md-content layout-padding>
+    <div>
+      <form name="form">
+        {{form.$valid}} {{form.password2.$error | json}}
+        <div>
+          <md-checkbox md-no-ink aria-label="Administrador" ng-model="vm.isadm" class="md-primary">
+            Administrador
+          </md-checkbox>
+        </div>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Nome</label>
+            <input required name="name" ng-model="vm.name">
+            <div ng-messages="form.name.$error">
+              <div ng-message="required">Campo obrigatório.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex flex-gt-xs="30">
+            <label>CPF</label>
+            <input required name="cpf" ng-model="vm.cpf" ui-mask="999.999.999-99" ui-mask-placeholder ui-mask-placeholder-char="_">
+            <div ng-messages="form.name.$error">
+              <div ng-message="required">Campo obrigatório.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Endereço</label>
+            <input ng-model="vm.address">
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Username</label>
+            <input required name="username" ng-model="vm.username">
+            <div ng-messages="form.username.$error">
+              <div ng-message="required">Campo obrigatório.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Número</label>
+            <input required name="clid" ng-model="vm.clid" ui-mask="9999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
+            <div ng-messages="form.clid.$error">
+              <div ng-message="required">Campo obrigatório.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Senha</label>
+            <input required name="password1" type="password" ng-model="vm.password1">
+            <div ng-messages="form.password1.$error">
+              <div ng-message="required">Campo obrigatório.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Confirmar Senha</label>
+            <!-- TODO: fix validator -->
+            <input required ui-validate="'$value == vm.password1'" ui-validate-watch="vm.password1" name="password2" type="password" ng-model="vm.password2">
+            <div ng-messages="form.password2.$error">
+              <div ng-message="required">Campo obrigatório.</div>
+              <div ng-message="validator">Confirmação incompatível.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>IMSI</label>
+            <input required name="imsi" ui-mask="99999999999" ui-mask-placeholder ui-mask-placeholder-char="_" ng-model="vm.imsi">
+            <div ng-messages="form.imsi.$error">
+              <div ng-message="required">Campo obrigatório.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Ki</label>
+            <input disabled name="ki" ui-mask="********************************" ng-model="vm.ki">
+          </md-input-container>
+        </div>
+        <md-dialog-actions layout="row">
+          <span flex></span>
+          <md-button class="md-raised md-primary" ng-click="vm.clean()">
+            Limpar
+          </md-button>
+          <md-button class="md-raised md-primary" ng-disabled="!form.$valid" ng-click="vm.save()">
+            Salvar
+          </md-button>
+        </md-dialog-actions>
+      </form>
+    </div>
+  </md-content>
+</div>

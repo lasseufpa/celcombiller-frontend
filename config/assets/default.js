@@ -23,7 +23,9 @@ module.exports = {
         'public/lib/angular-file-upload/dist/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/angular-material/angular-material.js',
-        'public/lib/angular-material-data-table/dist/md-data-table.min.js'
+        'public/lib/angular-material-data-table/dist/md-data-table.min.js',
+        'public/lib/angular-ui-mask/dist/mask.js',
+        'public/lib/angular-ui-validate/dist/validate.js'
         // endbower
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

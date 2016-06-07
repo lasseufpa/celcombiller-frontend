@@ -12,9 +12,9 @@
     // Users state routing
     $stateProvider
       .state('register', {
-        url: '/settings',
-        templateUrl: 'modules/celcombiller/client/views/settings/settings.client.view.html',
-        controller: 'SettingsController',
+        url: '/register',
+        templateUrl: 'modules/celcombiller/client/views/register.client.view.html',
+        controller: 'RegisterController',
         controllerAs: 'vm',
         data: {
           pageTitle: 'Cadastro de Usuário',

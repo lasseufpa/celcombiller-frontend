@@ -12,12 +12,10 @@
     var vm = this;
 
     vm.title = "Basic0";
-    vm.vvoice = 60;
     vm.vfilter = "";
     vm.array = null;
-    vm.increaseVoice = increaseVoice;
-    vm.increaseData = increaseData;
     vm.filter = filter;
+    vm.showDialog = showDialog;
     vm.selected = [];
 
 
@@ -26,54 +24,7 @@
     }).$promise;
 
 
-    function increaseVoice(_id) {
-      var balance = new VoiceBalanceAccessService();
-      balance.from_user_id = _id;
-      balance.value = vm.vvoice * 60;
-      balance.origin = "web";
-
-      balance.$save(function(resp, headers) {
-          //success callback
-          vm.promise = UserAccessService.query(function(data) {
-            vm.array = data.objects;
-
-          }).$promise;
-        },
-        function(err) {
-          UserAccessService.query(function(data) {
-            vm.array = data.objects;
-
-          });
-          // error callback
-          console.log(err);
-        });
-    }
-
-    function increaseData(_id) {
-      var balance = new DataBalanceAccessService();
-      balance.user_id = _id;
-      balance.value = vm.vfilter * 1024;
-      balance.origin = "web";
-
-      balance.$save(function(resp, headers) {
-          //success callback
-          vm.promise = UserAccessService.query(function(data) {
-            vm.array = data.objects;
-
-          }).$promise;
-        },
-        function(err) {
-          UserAccessService.query(function(data) {
-            vm.array = data.objects;
-          });
-          // error callback
-          console.log(err);
-        });
-    }
-
-
     function filter(item) {
-
       if ((String(item._id).indexOf(vm.vfilter) >= 0) ||
         (String(item.name).indexOf(vm.vfilter) >= 0) ||
         (String(item.clid).indexOf(vm.vfilter) >= 0)) {
@@ -84,20 +35,25 @@
     }
 
 
-
-
-    vm.showDialog = function(ev) {
+    function showDialog(ev) {
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && vm.customFullscreen;
-      console.log($mdMedia('sm'))
       if (vm.selected.length != 0) {
         $mdDialog.show({
           controller: DialogController,
           templateUrl: 'modules/celcombiller/client/views/basic-dialog.client.view.html',
           parent: angular.element(document.body),
           clickOutsideToClose: true,
-          fullscreen: true,
+          fullscreen: useFullScreen,
           targetEvent: ev
 
+        }).then(function() {
+          vm.promise = UserAccessService.query(function(data) {
+            vm.array = vm.filteredItems = data.objects;
+          }).$promise;
+        }, function() {
+          vm.promise = UserAccessService.query(function(data) {
+            vm.array = vm.filteredItems = data.objects;
+          }).$promise;
         });
       } else { console.log("vazio"); }
     };
@@ -105,24 +61,85 @@
 
 
     function DialogController($scope, $mdDialog) {
-
-      console.log(vm.array[name])
-
       $scope.selected = vm.selected;
+      $scope.dataunities = { 'KB': 1024, 'MB': 1024 * 1024, 'GB': 1024 * 1024 * 1024 };
+      $scope.datavalues = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512];
+      $scope.voiceunities = { 'Segundos': 1, 'Minutos': 60, 'Horas': 60 * 60 }
+      $scope.voicevalues = [1, 5, 10, 15, 30, 45];
+      $scope.dataunit = "";
+      $scope.datavalue = "";
+      $scope.voiceunit = "";
+      $scope.voicevalue = "";
+
       $scope.hide = function() {
         $mdDialog.hide();
       };
       $scope.cancel = function() {
-        $mdDialog.cancel();
+        $mdDialog.hide();
       };
-      $scope.answer = function(answer) {
-        console.log("2");
-        $mdDialog.hide(answer);
+      $scope.save = function() {
+        //Melhor colocar if dentro ou fora do for??
+        //
+        if (($scope.voiceunit != "") && ($scope.voicevalue != "")) {
+          for (var i = 0; i < vm.selected.length; i++) {
+            increaseVoice(vm.selected[i], $scope.voiceunit * $scope.voicevalue);
+          }
+        }
+
+        if (($scope.dataunit != "") && ($scope.datavalue != "")) {
+          for (var i = 0; i < vm.selected.length; i++) {
+            increaseData(vm.selected[i], $scope.dataunit * $scope.datavalue);
+          }
+        }
+        vm.array = [];
+        $mdDialog.hide();
       };
     }
 
+    function increaseVoice(_id, value) {
+      var balance = new VoiceBalanceAccessService();
+      balance.from_user_id = _id;
+      balance.value = value;
+      balance.origin = "web";
 
+      balance.$save(function(resp, headers) {
+          //success callback
+          // vm.promise = UserAccessService.query(function(data) {
+          //   vm.array = data.objects;
 
+          // }).$promise;
+        },
+        function(err) {
+          // UserAccessService.query(function(data) {
+          //   vm.array = data.objects;
 
+          // });
+          // // error callback
+          // console.log(err);
+        }
+      );
+    }
+
+    function increaseData(_id, value) {
+      var balance = new DataBalanceAccessService();
+      balance.user_id = _id;
+      balance.value = value;
+      balance.origin = "web";
+
+      balance.$save(function(resp, headers) {
+          //success callback
+          // vm.promise = UserAccessService.query(function(data) {
+          //   vm.array = data.objects;
+
+          // }).$promise;
+        },
+        function(err) {
+          // UserAccessService.query(function(data) {
+          //   vm.array = data.objects;
+          // });
+          // // error callback
+          // console.log(err);
+        });
+    }
   }
 }());

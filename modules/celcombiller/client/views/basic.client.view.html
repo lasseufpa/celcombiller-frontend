@@ -2,54 +2,47 @@
   <div class="page-header">
     <h1>{{vm.title}}</h1>
   </div>
-  <div class="row">
-
-      <md-content layout-gt-sm="row" layout-padding>
-        <!--       <md-button class="md-fab md-mini md-primary" aria-label="Voice" ng-click="vm.test()"> + </md-button> -->
-        <md-input-container class="md-block" flex-gt-sm>
-          <md-button class="md-primary md-raised md-mini" ng-click="vm.showDialog($event)" >
-            Adicionar credito
-          </md-button>
-        </md-input-container>
-        <md-input-container class="md-block" flex-gt-sm>
-          <label>Filtro</label>
-          <input  name="name" type="string" ng-model="vm.vfilter" aria-label="amount">
-          <div  required ng-messages="name.$error" role="alert" ng-if="true" >
-            <div ng-message="required">You did not enter a field</div>
-          </div>
-        </md-input-container>
-      </md-content>
-
+  <div class="md-padding">
+    <md-content layout-gt-sm="row" layout-padding>
+      <!--       <md-button class="md-fab md-mini md-primary" aria-label="Voice" ng-click="vm.test()"> + </md-button> -->
+      <md-input-container class="md-block" flex-gt-sm>
+        <md-button class="md-primary md-raised md-mini" ng-click="vm.showDialog($event)">
+          Adicionar credito
+        </md-button>
+      </md-input-container>
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Filtro</label>
+        <input name="name" type="string" ng-model="vm.vfilter" aria-label="amount">
+        <div required ng-messages="name.$error" role="alert" ng-if="true">
+          <div ng-message="required">You did not enter a field</div>
+        </div>
+      </md-input-container>
+    </md-content>
   </div>
   <div class="row">
     <md-table-container>
       <table md-table md-row-select multiple md-progress="vm.promise" ng-model="vm.selected">
         <thead md-head md-order="mdorder">
-          <th md-column md-order-by="_id "><span>User Id</span></th>
-          <th md-column md-order-by="name"><span>User Name</span></th>
-          <th md-column md-numeric><span>CLID</span></th>
-          <th md-column><span>User Voice Balance</span></th>
-          <th md-column md-numeric><span>User Data Balance</span></th>
+          <th md-column md-order-by="_id "><span>Id</span></th>
+          <th md-column md-order-by="name"><span>Nome</span></th>
+          <th md-column md-numeric><span>Número</span></th>
+          <th md-column><span>Saldo de Voz</span></th>
+          <th md-column md-numeric><span>Saldo de Dados</span></th>
           <!--           <th md-column><span>Add Voice Balance</span></th>
           <th md-column><span>Add Data Balance</span></th> -->
         </thead>
         <tbody md-body>
-          <tr md-row md-select="item._id" md-auto-select ng-model="vm.selected"   ng-repeat="item in vm.filteredItems  | filter:vm.filter | orderBy: mdorder" >
+          <tr md-row md-select="item._id" md-auto-select ng-model="vm.selected" ng-repeat="item in vm.filteredItems  | filter:vm.filter | orderBy: mdorder">
             <td md-cell>{{item._id}}</td>
             <td md-cell>{{item.name}}</td>
             <td md-cell>{{item.clid}}</td>
             <td md-cell ng-if="item.voice_balance < 119 ">{{item.voice_balance |number:2}} Seg.</td>
             <td md-cell ng-if="(item.voice_balance >= 120 ) && (item.voice_balance < 7199 )">{{item.voice_balance/60 |number:2}} Min.</td>
-            <td md-cell ng-if="item.voice_balance  >= 7200 ">{{item.voice_balance|number:2}} Horas</td>
-            <td md-cell ng-if="item.data_balance  < 2047 ">{{item.data_balance | number:4}} B</td>
-            <td md-cell ng-if="(item.data_balance  >= 2048 ) && (item.data_balance  < 2097151) ">{{item.data_balance/1024 | number:4}} KB</td>
-            <td md-cell ng-if=" item.data_balance >= 2097152 ">{{item.data_balance/1048576 | number:4}} MB</td>
-            <!--   <td md-cell>
-              <md-button class="md-fab md-mini md-primary" aria-label="Voice" ng-click="vm.increaseVoice(item._id)"> + </md-button>
-            </td>
-            <td md-cell>
-              <md-button class="md-fab md-mini md-primary" aria-label="Data" ng-click="vm.increaseData(item._id)"> + </md-button>
-            </td> -->
+            <td md-cell ng-if="item.voice_balance  >= 7200 ">{{item.voice_balance/3600|number:2}} Horas</td>
+            <td md-cell ng-if="item.data_balance  < 2047 ">{{item.data_balance | number:2}} B</td>
+            <td md-cell ng-if="(item.data_balance  >= 2048 ) && (item.data_balance  < 2097151) ">{{item.data_balance/1024 | number:2}} KB</td>
+            <td md-cell ng-if=" item.data_balance >= 2097152 && item.data_balance < 2147483647 ">{{item.data_balance/1048576 | number:2}} MB</td>
+            <td md-cell ng-if="item.data_balance >= 2147483648 ">{{item.data_balance/1073741824 | number:4}} GB</td>
           </tr>
         </tbody>
       </table>

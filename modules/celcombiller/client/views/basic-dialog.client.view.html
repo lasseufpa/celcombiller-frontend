@@ -1,47 +1,74 @@
-
-<md-dialog aria-label="Mango (Fruit)" ng-cloak>
+<md-dialog aria-label="Adicionar Credito" ng-cloak>
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <h2>Mango (Fruit)</h2>
+      <h2>Adicionar Credito</h2>
       <span flex></span>
-      <md-button class="md-icon-button" ng-click="cancel()">
-        <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-      </md-button>
     </div>
   </md-toolbar>
-  <md-dialog-content>
-   <md-content layout-gt-sm="row" layout-padding>
-        <md-button class="md-fab md-mini md-primary" aria-label="Voice" ng-click=""> + </md-button>
-        </td>
-        <md-input-container class="md-block" flex-gt-sm>
-          <label>Credito de voz (em minutos)</label>
-          <label>Filtro</label>
-          <input type="string" ng-model="vm.vfilter" aria-label="amount">
-        </md-input-container>
-        <md-input-container class="md-block" flex-gt-sm>
-          <label>Credito de Dados (em KB)</label>
-          <input type="number" ng-model="vm.vdata" aria-label="amount">
-          <br>
-          <br>
-        </md-input-container>
-      </md-content>
-  </md-dialog-content>
+  <!--  <span> Escolha os valores de credito a serem adicionados para os usuários selecionados
+</span> -->
+  <md-list>
+    <md-list-item class="md-2-line">
+      <div class="md-list-item-text">
+        <span>Voz:</span>
+        <md-dialog-content>
+          <md-content layout-gt-sm="row" layout-padding>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Valor</label>
+              <md-select aria-label="Valor" ng-model="voicevalue">
+                <md-option ng-repeat="value in voicevalues" value="{{value}}">
+                  {{value}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Unidade</label>
+              <md-select aria-label="Unidade" ng-model="voiceunit">
+                <md-option ng-repeat="(unit,value) in voiceunities
+ " value="{{value}}">
+                  {{unit}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </md-content>
+        </md-dialog-content>
+      </div>
+    </md-list-item>
+    <md-list-item class="md-2-line">
+      <div class="md-list-item-text">
+        <span>Dados:</span>
+        <md-dialog-content>
+          <md-content layout-gt-sm="row" layout-padding>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Valor</label>
+              <md-select aria-label="Valor" ng-model="datavalue">
+                <md-option ng-repeat="value in datavalues" value="{{value}}">
+                  {{value}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Unidade</label>
+              <md-select aria-label="Unidade" ng-model="dataunit">
+                <md-option ng-repeat="(unit,value) in dataunities
+ " value="{{value}}">
+                  {{unit}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </md-content>
+        </md-dialog-content>
+      </div>
+    </md-list-item>
+  </md-list>
   <md-dialog-actions layout="row">
-    <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
-      More on Wikipedia
-    </md-button>
     <span flex></span>
-    <md-button ng-click="answer('not useful')">
-      Not Useful
+    <md-button ng-click="cancel()">
+      Cancelar
     </md-button>
-    <md-button ng-click="answer('useful')">
-      Useful
+    <md-button ng-click="save()">
+      Salvar
     </md-button>
   </md-dialog-actions>
-
-
-
-
-
   </form>
 </md-dialog>
