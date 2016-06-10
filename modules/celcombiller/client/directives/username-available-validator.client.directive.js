@@ -21,22 +21,31 @@
     return directive;
 
     function link(scope, element, attrs, ngModel) {
-      ngModel.$asyncValidators.available = checkuser;
+      // ngModel.$validators.available = function(){return false};
 
-      function checkuser(value) {
-        var filters = [{ "name": attrs.checkAvailableValidator, "op": "eq", "val": value }];
+      ngModel.$asyncValidators.notavaliable = check;
+
+      function check(value) {
+        var atribute = attrs.checkAvailableValidator;
+        var filters = [{ "name": atribute, "op": "eq", "val": value }];
         var json = JSON.stringify({ "filters": filters })
         var _http = $http.jsonp('http://127.0.0.1:5000/api/users?callback=JSON_CALLBACK', {
           params: {
             "q": json
           }
 
-        }).then(function success (data) {
-            return data.data.data;
-        }, function error (data) {
-            return data.data.data;
+        }).then(function success(data) {
+          if (data.data.data.objects.length == 0) {
+            // return data.data.data.objects[0]
+            return $q.defer();
+          } else {;
+            return $q.reject();
+          }
+          //return data.data.data;
+        }, function error(data) {
+          //TODO: handle the error
+          return $q.reject();
         })
-        console.log(_http)
         return _http;
       };
     };
