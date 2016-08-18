@@ -53,7 +53,7 @@
         return false;
       }
 
-      $http.post('/api/auth/signin', vm.credentials).success(function (response) {
+      $http.post('http://127.0.0.1:5000/login', vm.credentials).success(function (response) {
         // If successful we assign the response to the global user model
         vm.authentication.user = response;
 

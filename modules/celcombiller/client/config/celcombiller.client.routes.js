@@ -21,6 +21,19 @@
           roles: ['user', 'admin']
         }
       })
+      .state('adm-historic', {
+        url: '/admhistoric',
+        templateUrl: 'modules/celcombiller/client/views/basic.client.view.html',
+        controller: 'BasicController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Basic',
+
+        }
+      })
+
+
+
       .state('credit', {
         abstract: true,
         url: '/settings',

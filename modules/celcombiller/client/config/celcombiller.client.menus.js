@@ -27,6 +27,11 @@
       type: 'dropdown'
     });
 
+        menuService.addMenuItem('topbar', {
+      title: 'Histórico de Usuários',
+      state: 'adm-historic'
+    });
+
     menuService.addSubMenuItem('topbar', 'credit', {
       title: 'Adição Manual',
       state: 'credit.manual'
