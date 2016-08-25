@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('celcombiller.basic')
+    .module('celcombiller.services')
     .factory('UserAccessService', UserAccessService);
 
   UserAccessService.$inject = ['$resource'];

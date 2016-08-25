@@ -1,0 +1,42 @@
+<md-dialog aria-label="Adicionar Credito" ng-cloak>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Adicionar Usuário a Plano</h2>
+      <span flex></span>
+    </div>
+  </md-toolbar>
+  <div>
+    <md-content class="md-padding">
+      <form ng-submit="$event.preventDefault()">
+        <div layout-gt-sm="row">
+          <md-autocomplete flex md-require-match required md-selected-item="crl.selectedItem" md-search-text-change="crl.searchTextChange(crl.searchText)" md-search-text="crl.searchText" md-selected-item-change="crl.selectedItemChange(item)" md-items="item in crl.filteredItems" md-item-text="item.name" md-min-length="3" md-floating-label="Nome do usuário">
+            <md-item-template>
+              <span md-highlight-text="crl.searchText" md-highlight-flags="^i">{{item.name}}</span>
+            </md-item-template>
+            <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
+              <div ng-message="required">Por favor selecione um usuário.</div>
+              <div ng-message="md-require-match">Por favor selecione um usuário valido.</div>
+            </div>
+            <md-not-found>
+              Nenhum usuário achado
+            </md-not-found>
+          </md-autocomplete>
+        </div>
+        <md-input-container flex required>
+          <label>Número de meses.</label>
+          <input type="number" min="1" ng-model="crl.number">
+        </md-input-container>
+      </form>
+    </md-content>
+  </div>
+  <md-dialog-actions layout="row">
+    <span flex></span>
+    <md-button ng-click="crl.cancel()">
+      Cancelar
+    </md-button>
+    <md-button ng-click="crl.save()">
+      Salvar
+    </md-button>
+  </md-dialog-actions>
+  </form>
+</md-dialog>

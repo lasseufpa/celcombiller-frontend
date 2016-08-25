@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('celcombiller.basic')
+    .module('celcombiller.credit')
     .controller('RegisterController', RegisterController);
 
   RegisterController.$inject = ['UserAccessService'];

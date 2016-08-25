@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('celcombiller.basic')
+    .module('celcombiller.credit')
     .factory('VoiceBalanceAccessService', VoiceBalanceAccessService);
 
   VoiceBalanceAccessService.$inject = ['$resource'];

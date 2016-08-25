@@ -2,16 +2,16 @@
   'use strict';
 
   angular
-    .module('celcombiller.basic')
-    .controller('BasicController', BasicController);
+    .module('celcombiller.credit')
+    .controller('CreditManualController', CreditManualController);
 
-  BasicController.$inject = ['UserAccessService', 'DataBalanceAccessService', 'VoiceBalanceAccessService', '$timeout', '$mdDialog', '$mdMedia'];
+  CreditManualController.$inject = ['UserAccessService', 'DataBalanceAccessService', 'VoiceBalanceAccessService', '$timeout', '$mdDialog', '$mdMedia'];
 
-  function BasicController(UserAccessService, DataBalanceAccessService, VoiceBalanceAccessService, $timeout, $mdDialog, $mdMedia) {
+  function CreditManualController(UserAccessService, DataBalanceAccessService, VoiceBalanceAccessService, $timeout, $mdDialog, $mdMedia) {
 
     var vm = this;
 
-    vm.title = "Basic0";
+    vm.title = "Créditos";
     vm.vfilter = "";
     vm.array = null;
     vm.filter = filter;
@@ -40,7 +40,7 @@
       if (vm.selected.length != 0) {
         $mdDialog.show({
           controller: DialogController,
-          templateUrl: 'modules/celcombiller/client/views/basic-dialog.client.view.html',
+          templateUrl: 'modules/celcombiller/client/views/credit/manual-dialog.client.view.html',
           parent: angular.element(document.body),
           clickOutsideToClose: true,
           fullscreen: useFullScreen,

@@ -1,0 +1,45 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.title}}</h1>
+  </div>
+  <div class="md-padding">
+    <md-content layout-gt-sm="row" layout-padding>
+      <!--       <md-button class="md-fab md-mini md-primary" aria-label="Voice" ng-click="vm.test()"> + </md-button> -->
+      <md-input-container class="md-block" flex-gt-sm>
+        <md-button class="md-primary md-raised md-mini" ng-click="vm.showDialog($event)">
+          Adicionar Usuário ao Plano
+        </md-button>
+      </md-input-container>
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Filtro</label>
+        <input name="name" type="string" ng-model="vm.vfilter" aria-label="amount">
+      </md-input-container>
+    </md-content>
+  </div>
+  <div class="row">
+    <md-table-container>
+      <table md-table md-row-select  md-progress="vm.promise" ng-model="vm.selected">
+        <thead md-head md-order="mdorder">
+          <th md-column md-order-by="_id "><span>Id</span></th>
+          <th md-column md-order-by="name"><span>Nome</span></th>
+          <th md-column md-numeric><span>Dia</span></th>
+          <th md-column md-numeric><span>Valor</span></th>
+          <th md-column><span>Tipo</span></th>
+          <!--           <th md-column><span>Add Voice Balance</span></th>
+          <th md-column><span>Add Data Balance</span></th> -->
+        </thead>
+        <tbody md-body>
+          <tr md-row md-select="item" md-auto-select ng-model="vm.selected" ng-repeat="item in vm.filteredItems  | filter:vm.filter | orderBy: mdorder">
+            <td md-cell>{{item._id}}</td>
+            <td md-cell>{{item.name}}</td>
+            <td md-cell>{{item.day}}</td>
+            <td md-cell>{{item.value}}</td>
+            <td md-cell ng-if="item.kind == 1 "> Voz</td>
+            <td md-cell ng-if="item.kind == 2 "> Dados</td>
+            <td md-cell ng-if="item.kind == 3 "> Voz/Dados</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </div>
+</section>

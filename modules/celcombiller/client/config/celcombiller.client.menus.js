@@ -11,13 +11,7 @@
   function menuConfig(menuService) {
 
     menuService.addMenuItem('topbar', {
-      title: 'Basic',
-      state: 'basic',
-
-    });
-
-    menuService.addMenuItem('topbar', {
-      title: 'Cadastrar',
+      title: 'Cadastrar Novo Usuário',
       state: 'register',
     });
 
@@ -27,7 +21,8 @@
       type: 'dropdown'
     });
 
-        menuService.addMenuItem('topbar', {
+
+    menuService.addMenuItem('topbar', {
       title: 'Histórico de Usuários',
       state: 'adm-historic'
     });
@@ -37,9 +32,16 @@
       state: 'credit.manual'
     });
     menuService.addSubMenuItem('topbar', 'credit', {
-      title: 'Adição por Agendamento',
-      state: 'credit.schedule '
+      title: 'Listar Planos',
+      state: 'credit.schedule-list '
     });
+    menuService.addSubMenuItem('topbar', 'credit', {
+      title: 'Criar Plano',
+      state: 'credit.schedule-create'
+    });
+
+
+
 
     menuService.addMenuItem('topbar', {
       title: 'Painel de Controle',
