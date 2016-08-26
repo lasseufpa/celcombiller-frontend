@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   angular
@@ -12,7 +12,7 @@
 
     menuService.addMenuItem('topbar', {
       title: 'Cadastrar Novo Usuário',
-      state: 'register',
+      state: 'register'
     });
 
     menuService.addMenuItem('topbar', {
@@ -20,7 +20,6 @@
       state: 'credit',
       type: 'dropdown'
     });
-
 
     menuService.addMenuItem('topbar', {
       title: 'Histórico de Usuários',
@@ -40,9 +39,6 @@
       state: 'credit.schedule-create'
     });
 
-
-
-
     menuService.addMenuItem('topbar', {
       title: 'Painel de Controle',
       state: 'settings',
@@ -53,11 +49,11 @@
       title: 'Converter Chave em Créditos',
       state: 'settings.password'
     });
-  menuService.addSubMenuItem('topbar', 'settings', {
+    menuService.addSubMenuItem('topbar', 'settings', {
       title: 'Créditos Disponíveis',
       state: 'settings.picture'
     });
-  menuService.addSubMenuItem('topbar', 'settings', {
+    menuService.addSubMenuItem('topbar', 'settings', {
       title: 'Histórico de Chamadas ',
       state: 'settings.picture'
     });

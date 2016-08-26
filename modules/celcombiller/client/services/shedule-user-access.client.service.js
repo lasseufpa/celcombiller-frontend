@@ -8,9 +8,9 @@
   ScheduleUserService.$inject = ['$resource'];
 
   function ScheduleUserService($resource) {
-    return $resource('http://127.0.0.1:5000/api/schedule_user/:user_id/:schedule_id', {}, {
+    return $resource('http://127.0.0.1:5000/api/schedule_user/', {}, {
       'query': {
-        // method:'GET', isArray:true
+       method:'GET', params:{user_id:2,schedule_id:1}, isArray:false
       }
     });
   }

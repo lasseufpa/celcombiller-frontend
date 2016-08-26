@@ -7,15 +7,19 @@
   </md-toolbar>
   <div>
     <md-content class="md-padding">
-      <form ng-submit="$event.preventDefault()">
+      <form name="searchForm" ng-submit="$event.preventDefault()">
         <div layout-gt-sm="row">
-          <md-autocomplete flex md-require-match required md-selected-item="crl.selectedItem" md-search-text-change="crl.searchTextChange(crl.searchText)" md-search-text="crl.searchText" md-selected-item-change="crl.selectedItemChange(item)" md-items="item in crl.filteredItems" md-item-text="item.name" md-min-length="3" md-floating-label="Nome do usuário">
+          <md-autocomplete md-require-match="true" md-require-match ng-model-options="{allowInvalid: false}" md-input-name="autocompleteField" flex required md-selected-item="crl.selectedItem" md-search-text-change="crl.searchTextChange(crl.searchText)" md-search-text="crl.searchText" md-selected-item-change="crl.selectedItemChange(item)" md-items="item in crl.filteredItems" md-item-text="item.name" md-min-length="3" md-floating-label="Nome do usuário" md-require-match>
             <md-item-template>
               <span md-highlight-text="crl.searchText" md-highlight-flags="^i">{{item.name}}</span>
             </md-item-template>
             <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
               <div ng-message="required">Por favor selecione um usuário.</div>
               <div ng-message="md-require-match">Por favor selecione um usuário valido.</div>
+            </div>
+            <!--TODO: create a directiva to ckeck the validity, md-require-match is not working-->
+            <div ng-if="crl.notvalid" ng-if="searchForm.autocompleteField.$touched">
+              Por favor selecione um usuário valido.
             </div>
             <md-not-found>
               Nenhum usuário achado
