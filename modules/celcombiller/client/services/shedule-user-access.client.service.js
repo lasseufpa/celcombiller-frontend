@@ -3,14 +3,16 @@
 
   angular
     .module('celcombiller.services')
-    .factory('ScheduleUserService', ScheduleUserService);
+    .factory('ScheduleUserAccessService', ScheduleUserAccessService);
 
-  ScheduleUserService.$inject = ['$resource'];
+  ScheduleUserAccessService.$inject = ['$resource'];
 
-  function ScheduleUserService($resource) {
+  function ScheduleUserAccessService($resource) {
     return $resource('http://127.0.0.1:5000/api/schedule_user/', {}, {
       'query': {
-       method:'GET', params:{user_id:2,schedule_id:1}, isArray:false
+        method: 'GET',
+        params: { user_id: 2, schedule_id: 1 },
+        isArray: false
       }
     });
   }
