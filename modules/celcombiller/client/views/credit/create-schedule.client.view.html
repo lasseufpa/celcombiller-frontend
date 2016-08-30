@@ -1,0 +1,71 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.title}}</h1>
+  </div>
+  <div layout="column" ng-cloak class="md-inline-form">
+    <md-content layout-padding>
+      <div>
+        <form name="form">
+          <md-content layout="row" layout-padding>
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Nome do plano</label>
+              <input check-schedule-validator="name" ng-model-options="{ debounce : { 'default' : 500, blur : 0 } }" required name="name" ng-model="vm.name">
+              <div ng-messages="form.name.$error">
+                <div ng-message="required">Campo obrigatório.</div>
+                <div ng-message="notavaliable"> Nome não disponível.</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Tipo</label>
+              <md-select aria-label="Tipo" ng-model="vm.kind" ng-change="vm.onChange()">
+                <md-option ng-repeat="(s,n) in vm.kinds" value="{{n}}">
+                  {{s}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </md-content>
+          <md-content layout="row" layout-padding>
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Dia do mês</label>
+              <input required name="day" type="number" ng-model="vm.day" min="1" max="28">
+              <div ng-messages="form.day.$error">
+                <div ng-message="required">Campo obrigatório.</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Valor</label>
+              <md-select aria-label="Valor" ng-model="vm.value">
+                <md-option required ng-repeat="valor in vm.values" value="{{valor}}">
+                  {{valor}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Unidade</label>
+              <md-select required aria-label="unidade" ng-model="vm.unity" ">
+              <md-option ng-repeat="(s,n) in vm.unities " value="{{n}} ">
+                {{s}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </md-content>
+        <md-content layout="row " layout-padding>
+        <md-input-container  class="md-block " flex-gt-xs>
+          <label>Descrição</label>
+          <textarea disabled ng-model="vm.description " md-maxlength="150 " rows="5 " md-select-on-focus></textarea>
+        </md-input-container>
+        </md-content>
+    </div>
+    <md-button class="md-raised md-primary " ng-click="vm.clean() ">
+      Limpar
+    </md-button>
+    <!--  -->
+    <md-button type="submit " ng-disabled="!form.$valid " class="md-raised md-primary " ng-click="vm.save();form.$setPristine(); form.$setUntouched(); ">
+      Salvar
+    </md-button>
+    </md-dialog-actions>
+    </form>
+</div>
+</md-content>
+</div>
+</section>

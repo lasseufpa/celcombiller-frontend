@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('celcombiller.credit')
+    .module('celcombiller.user')
     .controller('RegisterController', RegisterController);
 
-  RegisterController.$inject = ['UserAccessService'];
+  RegisterController.$inject = ['UserAccessService', '$mdDialog'];
 
-  function RegisterController(UserAccessService) {
+  function RegisterController(UserAccessService, $mdDialog) {
 
     var vm = this;
 
@@ -57,7 +57,6 @@
       vm.imsi = '';
       vm.ki = '';
 
-      vm.message = '';
     }
 
     function addUser(level, name, cpf, address, username, clid,
@@ -78,10 +77,39 @@
       newuser.data_balance = 0;
 
       newuser.$save(function(resp, headers) {
-
+        alertOk();
       }, function(err) {
-        vm.message = 'Um erro ocorreu';
+        alertNotOk();
       });
     }
+
+
+    function alertOk(ev) {
+      $mdDialog.show(
+        $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Operação realizada com sucesso')
+        .textContent('Usuário criado com sucesso')
+        .ariaLabel('Operação realizada com sucesso')
+        .ok('OK')
+        .targetEvent(ev)
+      );
+    }
+
+    function alertNotOk(ev) {
+      $mdDialog.show(
+        $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Erro')
+        .textContent('Um erro ocorreu ao criar usuário')
+        .ariaLabel('Erro')
+        .ok('OK')
+        .targetEvent(ev)
+      );
+    }
+
+
   }
 }());

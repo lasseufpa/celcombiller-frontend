@@ -53,8 +53,8 @@
 
     .state('credit.schedule-create', {
       url: '/schedule/create',
-      templateUrl: 'modules/celcombiller/client/views/settings/settings.client.view.html',
-      controller: 'SettingsController',
+      templateUrl: 'modules/celcombiller/client/views/credit/create-schedule.client.view.html',
+      controller: 'CreateScheduleController',
       controllerAs: 'vm',
       data: {
         pageTitle: 'Criar Planos',

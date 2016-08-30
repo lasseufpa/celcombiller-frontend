@@ -28,7 +28,7 @@
         </div>
         <md-input-container flex required>
           <label>Número de meses.</label>
-          <input type="number" min="1" ng-model="crl.number">
+          <input required type="number" min="1" ng-model="crl.number">
         </md-input-container>
       </form>
     </md-content>
@@ -38,7 +38,7 @@
     <md-button ng-click="crl.cancel()">
       Cancelar
     </md-button>
-    <md-button ng-click="crl.save()">
+    <md-button ng-disabled="!searchForm.$valid || (crl.selectedItem == null)" ng-click="crl.save()">
       Salvar
     </md-button>
   </md-dialog-actions>
