@@ -11,7 +11,7 @@
 
     var vm = this;
 
-    vm.title = 'Criar plano';
+    vm.title = 'Criação de plano';
 
     vm.kinds = { 'Voz': 1, 'Dados': 2 }; // 'Voz/Dados': 3 };
 
@@ -30,10 +30,16 @@
     vm.onChange = onChange;
 
     function onChange() {
-      if (vm.kind === 1) {
+      console.log('change')
+      console.log(vm.kind)
+      if (parseInt(vm.kind) === 1) {
+              console.log('no if')
+
         vm.unities = voiceunities;
         vm.values = voicevalues;
-      } else if (vm.kind === 2) {
+      } else if (parseInt(vm.kind) === 2) {
+      console.log('no else')
+
         vm.unities = dataunities;
         vm.values = datavalues;
       }

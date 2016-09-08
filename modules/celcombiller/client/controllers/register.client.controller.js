@@ -10,7 +10,7 @@
   function RegisterController(UserAccessService, $mdDialog) {
 
     var vm = this;
-
+    vm.title = 'Cadastro de Usuário';
     vm.level = '';
     vm.name = '';
     vm.cpf = '';

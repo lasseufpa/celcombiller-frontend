@@ -11,7 +11,7 @@
 
     var vm = this;
 
-    vm.title = 'Créditos';
+    vm.title = 'Adição Manual de Créditos';
     vm.vfilter = '';
     vm.array = null;
     vm.filter = filter;

@@ -18,7 +18,7 @@
         controllerAs: 'vm',
         data: {
           pageTitle: 'Cadastro de Usuário',
-          roles: ['user', 'admin']
+          roles: ['admin']
         }
       })
 
@@ -59,6 +59,33 @@
       data: {
         pageTitle: 'Criar Planos',
         roles: ['admin', 'coll']
+      }
+    })
+    .state('historic', {
+      abstract: true,
+      url: '/historic',
+      templateUrl: 'modules/celcombiller/client/views/historic/historic.client.view.html'
+    })
+
+    .state('historic.user', {
+      url: '/historic/user',
+      templateUrl: 'modules/celcombiller/client/views/historic/historic-user.client.view.html',
+      controller: 'HistoricUserController',
+      controllerAs: 'vm',
+      data: {
+        pageTitle: 'Histórico',
+        roles: ['user']
+      }
+    })
+
+    .state('historic.admin', {
+      url: '/historic/admin',
+      templateUrl: 'modules/celcombiller/client/views/historic/historic-admin.client.view.html',
+      controller: 'HistoricAdminController',
+      controllerAs: 'vm',
+      data: {
+        pageTitle: 'Histórico de Usuários',
+        roles: ['admin']
       }
     })
 

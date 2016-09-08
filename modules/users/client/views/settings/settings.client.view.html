@@ -1,26 +1,38 @@
 <section>
-  <div class="page-header">
-    <h1>Settings</h1>
-  </div>
-  <div class="row">
-    <nav class="col-sm-3 col-md-3">
-      <ul class="nav nav-pills nav-stacked">
-        <li ui-sref-active="active">
-          <a ui-sref="settings.profile">Edit Profile</a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref="settings.picture">Change Profile Picture</a>
-        </li>
-        <li ui-sref-active="active" ng-show="vm.user.provider === 'local'">
-          <a ui-sref="settings.password">Change Password</a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref="settings.accounts">Manage Social Accounts</a>
-        </li>
-      </ul>
-    </nav>
-    <div class="col-sm-9 col-md-8 settings-view">
-      <div ui-view></div>
+    <div class="page-header">
+        <h1>Configurações</h1>
     </div>
-  </div>
+    <div class="row" ng-cloak>
+<!--         <side-nav class="col-sm-3 col-md-3">
+            <ul class="nav nav-pills nav-stacked">
+                <li ui-sref-active="active">
+                    <a ui-sref="settings.profile">Editar Perfil</a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="settings.password">Mudar Senha</a>
+                </li>
+            </ul>
+        </side-nav> -->
+
+
+    <md-sidenav
+        class="col-sm-3 col-md-3"
+        md-component-id="left"
+        md-is-locked-open="true"
+        md-whiteframe="4">
+
+      <ul class="nav nav-pills md-nav-stacked">
+                <li ui-sref-active="active">
+                    <a ui-sref="settings.profile">Editar Perfil</a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="settings.password">Mudar Senha</a>
+                </li>
+            </ul>
+    </md-sidenav>
+
+        <div class="col-sm-9 col-md-8 settings-view">
+            <div ui-view></div>
+        </div>
+    </div>
 </section>

@@ -3,6 +3,7 @@
 
   app.registerModule('celcombiller');
   app.registerModule('celcombiller.credit');
+  app.registerModule('celcombiller.historic');
   app.registerModule('celcombiller.user');
   app.registerModule('celcombiller.admin');
   app.registerModule('celcombiller.admin.routes', ['ui.router', 'core.routes', 'users.admin.services']);
