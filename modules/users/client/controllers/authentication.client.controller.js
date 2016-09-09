@@ -5,9 +5,9 @@
     .module('users')
     .controller('AuthenticationController', AuthenticationController);
 
-  AuthenticationController.$inject = ['$scope', '$state', '$http', '$location', '$window', 'Authentication', 'PasswordValidator'];
+  AuthenticationController.$inject = ['$scope', '$state', '$http', '$location', '$window', 'Authentication', 'PasswordValidator','MyIP'];
 
-  function AuthenticationController($scope, $state, $http, $location, $window, Authentication, PasswordValidator) {
+  function AuthenticationController($scope, $state, $http, $location, $window, Authentication, PasswordValidator,MyIP) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -53,7 +53,7 @@
         return false;
       }
 
-      $http.post('http://127.0.0.1:5000/login', vm.credentials).success(function (response) {
+      $http.post('http://'+MyIP+':5000/login', vm.credentials).success(function (response) {
         // If successful we assign the response to the global user model
         vm.authentication.user = response;
 

@@ -47,64 +47,64 @@
                 <div ng-message="required">Campo obrigatório.</div>
                 <div ng-message="notavaliable"> Username não disponível.</div>
               </div>
-              <!--             <div ng-if="form.username.$pending">
+                            <!--             <div ng-if="form.username.$pending">
               Checking Username...
             </div> -->
-            </md-input-container>
-            <md-input-container class="md-block" flex-gt-sm>
-              <label>Número</label>
-              <input required name="clid" ng-model="vm.clid" ui-mask="9999-99999" ui-mask-placeholder ui-mask-placeholder-char="_" check-available-validator="clid" ng-model-options="{ debounce : {  blur : 0 } }">
-              <div ng-messages="form.clid.$error" ng-show="form.clid.$dirty" md-auto-hide="false" ng-if="form.clid.$touched" role="alert">
-                <div ng-message="notavaliable">Número não disponível.</div>
-                <div ng-message="required">Campo obrigatório.</div>
-              </div>
-            </md-input-container>
-          </div>
-          <div layout-gt-sm="row">
-            <md-input-container class="md-block" flex-gt-sm>
-              <label>Senha</label>
-              <input required name="password1" type="password" ng-model="vm.password1">
-              <div ng-messages="form.password1.$error">
-                <div ng-message="required">Campo obrigatório.</div>
-              </div>
-            </md-input-container>
-            <md-input-container class="md-block" flex-gt-sm>
-              <label>Confirmar Senha</label>
-              <!-- TODO: fix validator -->
-              <input required ui-validate="'$value == vm.password1'" ui-validate-watch="vm.password1" name="password2" type="password" ng-model="vm.password2">
-              <div ng-messages="form.password2.$error" md-auto-hide="false" ng-if="form.password2.$touched" role="alert">
-                <div ng-message="validator">Confirmação incompatível.</div>
-                <div ng-message="required">Campo obrigatório.</div>
-              </div>
-            </md-input-container>
-          </div>
-          <div layout-gt-sm="row">
-            <md-input-container class="md-block" flex-gt-sm>
-              <label>IMSI</label>
-              <input check-available-validator="imsi" ng-model-options="{ debounce : {  blur : 0 } }" required name="imsi" ui-mask="999999999999999" ui-mask-placeholder ui-mask-placeholder-char="_" ng-model="vm.imsi">
-              <div ng-messages="form.imsi.$error">
-                <div ng-message="required">Campo obrigatório.</div>
-                <div ng-message="notavaliable">IMSI inválido.</div>
-              </div>
-            </md-input-container>
-            <md-input-container class="md-block" flex-gt-sm>
-              <label>Ki</label>
-              <input disabled name="ki" ui-mask="********************************" ng-model="vm.ki">
-            </md-input-container>
-          </div>
-          <md-dialog-actions layout="row">
-            <span flex></span>
-            <md-button class="md-raised md-primary" ng-click="vm.clean()">
-              Limpar
-            </md-button>
-            <!--  -->
-            <md-button type="submit" ng-disabled="!form.$valid" class="md-raised md-primary" ng-click="vm.save();form.$setPristine();
-    form.$setUntouched();">
-              Salvar
-            </md-button>
-          </md-dialog-actions>
-        </form>
-      </div>
-    </md-content>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Número</label>
+            <input required name="clid" ng-model="vm.clid" ui-mask="9999-99999" ui-mask-placeholder ui-mask-placeholder-char="_" check-available-validator="clid" ng-model-options="{ debounce : {  blur : 0 } }">
+            <div ng-messages="form.clid.$error" ng-show="form.clid.$dirty" md-auto-hide="false" ng-if="form.clid.$touched" role="alert">
+              <div ng-message="notavaliable">Número não disponível.</div>
+              <div ng-message="required">Campo obrigatório.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Senha</label>
+            <input required name="password1" type="password" ng-model="vm.password1">
+            <div ng-messages="form.password1.$error">
+              <div ng-message="required">Campo obrigatório.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Confirmar Senha</label>
+            <!-- TODO: fix validator -->
+            <input required ui-validate="'$value == vm.password1'" ui-validate-watch="vm.password1" name="password2" type="password" ng-model="vm.password2">
+            <div ng-messages="form.password2.$error" md-auto-hide="false" ng-if="form.password2.$touched" role="alert">
+              <div ng-message="validator">Confirmação incompatível.</div>
+              <div ng-message="required">Campo obrigatório.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>IMSI</label>
+            <input check-available-validator="imsi" ng-model-options="{ debounce : {  blur : 0 } }" required name="imsi" ui-mask="999999999999999" ui-mask-placeholder ui-mask-placeholder-char="_" ng-model="vm.imsi">
+            <div ng-messages="form.imsi.$error">
+              <div ng-message="required">Campo obrigatório.</div>
+              <div ng-message="notavaliable">IMSI inválido.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Ki</label>
+            <input disabled name="ki" ui-mask="********************************" ng-model="vm.ki">
+          </md-input-container>
+        </div>
+        <md-dialog-actions layout="row">
+          <span flex></span>
+          <md-button class="md-raised md-primary" ng-click="vm.clean()">
+            Limpar
+          </md-button>
+          <!--  -->
+          <md-button type="submit" ng-disabled="!form.$valid" class="md-raised md-primary" ng-click="vm.save();form.$setPristine();
+          form.$setUntouched();">
+          Salvar
+        </md-button>
+      </md-dialog-actions>
+    </form>
   </div>
+</md-content>
+</div>
 </section>

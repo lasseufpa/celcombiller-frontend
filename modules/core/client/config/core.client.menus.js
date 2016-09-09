@@ -19,10 +19,10 @@
       roles: ['user']
     });
 
-    menuService.addSubMenuItem('account', 'settings', {
-      title: 'Edit Profile',
-      state: 'settings.profile'
-    });
+    // menuService.addSubMenuItem('account', 'settings', {
+    //   title: 'Edit Profile',
+    //   state: 'settings.profile'
+    // });
 
     // menuService.addSubMenuItem('account', 'settings', {
     //   title: 'Edit Profile Picture',
@@ -30,7 +30,7 @@
     // });
 
     menuService.addSubMenuItem('account', 'settings', {
-      title: 'Change Password',
+      title: 'Redefnir Senha',
       state: 'settings.password'
     });
 

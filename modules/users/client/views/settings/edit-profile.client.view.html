@@ -1,24 +1,6 @@
 <section class="row">
     <div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
         <form name="form">
-            <div layout-gt-xs="row">
-                <md-input-container class="md-block" flex-gt-xs>
-                    <label>Nome</label>
-                    <input  name="name" ng-model="vm.name">
-                </md-input-container>
-            </div>
-            <div layout-gt-sm="row">
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Username</label>
-                    <input check-available-validator="username" ng-model-options="{ debounce : { 'default' : 500, blur : 0 } }" name="username" ng-model="vm.username">
-                    <div ng-messages="form.username.$error">
-                        <div ng-message="notavaliable"> Username não disponível.</div>
-                    </div>
-                    <!--             <div ng-if="form.username.$pending">
-              Checking Username...
-            </div> -->
-                </md-input-container>
-            </div>
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Endereço</label>
@@ -30,9 +12,7 @@
                 <md-button class="md-raised md-primary" ng-click="vm.clean()">
                     Limpar
                 </md-button>
-                <!--  -->
-                <md-button type="submit" ng-disabled="!form.$valid" class="md-raised md-primary" ng-click="vm.save();form.$setPristine();
-    form.$setUntouched();">
+                <md-button type="submit" ng-disabled="!form.$valid" class="md-raised md-primary" ng-click="vm.save();form.$setPristine(); form.$setUntouched();">
                     Salvar
                 </md-button>
             </md-dialog-actions>

@@ -5,9 +5,9 @@
     .module('celcombiller.credit')
     .controller('ScheduleListController', ScheduleListController);
 
-  ScheduleListController.$inject = ['ScheduleAccessService', 'UserAccessService', 'ScheduleUserAccessService', '$timeout', '$mdDialog', '$mdMedia', '$http', '$q'];
+  ScheduleListController.$inject = ['ScheduleAccessService', 'UserAccessService', 'ScheduleUserAccessService', '$timeout', '$mdDialog', '$mdMedia', '$http', '$q', 'MyIP'];
 
-  function ScheduleListController(ScheduleAccessService, UserAccessService, ScheduleUserAccessService, $timeout, $mdDialog, $mdMedia, $http, $q) {
+  function ScheduleListController(ScheduleAccessService, UserAccessService, ScheduleUserAccessService, $timeout, $mdDialog, $mdMedia, $http, $q, MyIP) {
     var vm = this;
 
     vm.title = 'Lista de Planos';
@@ -39,9 +39,19 @@
 
     function checkRemainTime(user_id, schedule_id) {
       // check the remaining time of a user in a schedule
-      var filters = [{ 'name': 'schedule_id', 'op': 'eq', 'val': schedule_id }, { 'name': 'user_id', 'op': 'eq', 'val': user_id }];
-      var json = JSON.stringify({ 'filters': filters });
-      var _http = $http.jsonp('http://127.0.0.1:5000/api/schedule_user?callback=JSON_CALLBACK', {
+      var filters = [{
+        'name': 'schedule_id',
+        'op': 'eq',
+        'val': schedule_id
+      }, {
+        'name': 'user_id',
+        'op': 'eq',
+        'val': user_id
+      }];
+      var json = JSON.stringify({
+        'filters': filters
+      });
+      var _http = $http.jsonp('http://' + MyIP + ':5000/api/schedule_user?callback=JSON_CALLBACK', {
         params: {
           'q': json
         }
@@ -69,14 +79,23 @@
     }
 
     function patchUserSchedule(schedule_id, user_id, number) {
-      var filters = [
-        { 'name': 'schedule_id', 'op': 'eq', 'val': schedule_id },
-        { 'name': 'user_id', 'op': 'eq', 'val': user_id }
-      ];
-      var json = JSON.stringify({ 'filters': filters });
-      var _http = $http.patch('http://127.0.0.1:5000/api/schedule_user', {
+      var filters = [{
+        'name': 'schedule_id',
+        'op': 'eq',
+        'val': schedule_id
+      }, {
+        'name': 'user_id',
+        'op': 'eq',
+        'val': user_id
+      }];
+      var json = JSON.stringify({
+        'filters': filters
+      });
+      var _http = $http.patch('http://' + MyIP + ':5000/api/schedule_user', {
 
-        'q': { 'filters': filters },
+        'q': {
+          'filters': filters
+        },
         'count': number
 
       });
@@ -165,7 +184,7 @@
       }
 
       function save() {
-        if (crl.selectedItem == null) {
+        if (crl.selectedItem === null) {
           crl.notvalid = true;
         } else {
           var schedule_user = new ScheduleUserAccessService();

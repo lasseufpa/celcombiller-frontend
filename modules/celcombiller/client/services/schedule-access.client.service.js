@@ -5,10 +5,10 @@
     .module('celcombiller.services')
     .factory('ScheduleAccessService', ScheduleAccessService);
 
-  ScheduleAccessService.$inject = ['$resource'];
+  ScheduleAccessService.$inject = ['$resource','MyIP'];
 
-  function ScheduleAccessService($resource) {
-    return $resource('http://127.0.0.1:5000/api/schedule/:schedule_id', {}, {
+  function ScheduleAccessService($resource,MyIP) {
+    return $resource('http://'+MyIP+':5000/api/schedule/:schedule_id', {}, {
       'query': {
         // method:'GET', isArray:true
       }

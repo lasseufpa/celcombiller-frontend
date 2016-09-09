@@ -8,9 +8,9 @@
     .module('celcombiller.credit')
     .directive('checkAvailableValidator', checkAvailableValidator);
 
-  checkAvailableValidator.$inject = ['$http', '$q'];
+  checkAvailableValidator.$inject = ['$http', '$q', 'MyIP'];
 
-  function checkAvailableValidator($http, $q) {
+  function checkAvailableValidator($http, $q, MyIP) {
 
     var directive = {
       require: 'ngModel',
@@ -27,9 +27,15 @@
 
       function check(value) {
         var atribute = attrs.checkAvailableValidator;
-        var filters = [{ 'name': atribute, 'op': 'eq', 'val': value }];
-        var json = JSON.stringify({ 'filters': filters });
-        var _http = $http.jsonp('http://127.0.0.1:5000/api/users?callback=JSON_CALLBACK', {
+        var filters = [{
+          'name': atribute,
+          'op': 'eq',
+          'val': value
+        }];
+        var json = JSON.stringify({
+          'filters': filters
+        });
+        var _http = $http.jsonp('http://' + MyIP + ':5000/api/users?callback=JSON_CALLBACK', {
           params: {
             'q': json
           }

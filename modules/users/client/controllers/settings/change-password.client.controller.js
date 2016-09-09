@@ -1,37 +1,45 @@
-(function () {
+(function() {
   'use strict';
 
   angular
     .module('users')
     .controller('ChangePasswordController', ChangePasswordController);
 
-  ChangePasswordController.$inject = ['$scope', '$http', 'Authentication', 'PasswordValidator'];
+  ChangePasswordController.$inject = ['$http', 'Authentication', '$mdDialog', '$q', 'MyIP' ];
 
-  function ChangePasswordController($scope, $http, Authentication, PasswordValidator) {
+  function ChangePasswordController($http, Authentication, $mdDialog, $q, MyIP) {
     var vm = this;
 
     vm.user = Authentication.user;
     vm.changeUserPassword = changeUserPassword;
-    vm.getPopoverMsg = PasswordValidator.getPopoverMsg;
 
-    // Change user password
-    function changeUserPassword(isValid) {
-      vm.success = vm.error = null;
+    function changeUserPassword() {
 
-      if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.passwordForm');
+    console.log(check(vm.current));
 
-        return false;
+      if (vm.current === vm.password1) {
+        vm.current = '';
+        vm.password1 = '';
+        vm.password2 = '';
+        alertEqual();
+        return;
       }
 
-      $http.post('/api/users/password', vm.passwordDetails).success(function (response) {
-        // If successful show success message and clear form
-        $scope.$broadcast('show-errors-reset', 'vm.passwordForm');
-        vm.success = true;
-        vm.passwordDetails = null;
-      }).error(function (response) {
-        vm.error = response.message;
-      });
+
+    }
+
+
+    function alertEqual(ev) {
+      $mdDialog.show(
+        $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Senhas Iguais')
+        .textContent('A nova senha não poder ser igual a senha antiga.')
+        .ariaLabel('Senhas Iguais')
+        .ok('OK')
+        .targetEvent(ev)
+      );
     }
   }
 }());

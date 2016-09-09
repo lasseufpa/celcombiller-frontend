@@ -3,7 +3,7 @@
         <h1>Configurações</h1>
     </div>
     <div class="row" ng-cloak>
-<!--         <side-nav class="col-sm-3 col-md-3">
+        <!--         <side-nav class="col-sm-3 col-md-3">
             <ul class="nav nav-pills nav-stacked">
                 <li ui-sref-active="active">
                     <a ui-sref="settings.profile">Editar Perfil</a>
@@ -13,24 +13,17 @@
                 </li>
             </ul>
         </side-nav> -->
-
-
-    <md-sidenav
-        class="col-sm-3 col-md-3"
-        md-component-id="left"
-        md-is-locked-open="true"
-        md-whiteframe="4">
-
-      <ul class="nav nav-pills md-nav-stacked">
-                <li ui-sref-active="active">
-                    <a ui-sref="settings.profile">Editar Perfil</a>
+        <md-sidenav class="col-sm-3 col-md-3" md-component-id="left" md-is-locked-open="true" md-whiteframe="4">
+            <ul class="nav nav-pills md-nav-stacked">
+                <!--                 <li ui-sref-active="active">
+                    <a ui-sref="settings.profile">Editar Endereço</a>
                 </li>
+ -->
                 <li ui-sref-active="active">
-                    <a ui-sref="settings.password">Mudar Senha</a>
+                    <a ui-sref="settings.password">Redefinir Senha</a>
                 </li>
             </ul>
-    </md-sidenav>
-
+        </md-sidenav>
         <div class="col-sm-9 col-md-8 settings-view">
             <div ui-view></div>
         </div>
