@@ -88,9 +88,7 @@
         'op': 'eq',
         'val': user_id
       }];
-      var json = JSON.stringify({
-        'filters': filters
-      });
+
       var _http = $http.patch('http://' + MyIP + ':5000/api/schedule_user', {
 
         'q': {

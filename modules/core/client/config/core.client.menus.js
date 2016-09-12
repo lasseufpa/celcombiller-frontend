@@ -30,7 +30,7 @@
     // });
 
     menuService.addSubMenuItem('account', 'settings', {
-      title: 'Redefnir Senha',
+      title: 'Redefinir Senha',
       state: 'settings.password'
     });
 
