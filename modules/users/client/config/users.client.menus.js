@@ -1,18 +1,19 @@
-// (function () {
-//   'use strict';
+(function() {
+  'use strict';
 
-//   angular
-//     .module('users')
-//     .run(menuConfig);
+  angular
+    .module('users')
+    .run(menuConfig);
 
-//   menuConfig.$inject = ['menuService'];
+  menuConfig.$inject = ['menuService'];
 
-//   // Configuring the Users module
-//   // function menuConfig(menuService) {
-//   //   console.log("users.client.menus, FUNCUIONA!!! !!")
-//   //   menuService.addMenuItem('topbar', {
-//   //     title: 'Cadastrar',
-//   //     state: 'register',
-//   //   });
-//   //}
-// }());
+  //Configuring the Users module
+  function menuConfig(menuService) {
+
+    menuService.addMenuItem('topbar', {
+      title: 'Controle de Usuários',
+      state: 'historic.admin',
+      roles: ['admin']
+    });
+  }
+}());
