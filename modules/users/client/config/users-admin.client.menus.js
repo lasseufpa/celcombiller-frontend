@@ -9,17 +9,17 @@
 
   // Configuring the Users module
   function menuConfig(menuService) {
-    menuService.addSubMenuItem('topbar', 'admin', {
-      title: 'Controle de Usuários',
-      state: 'admin.users'
-    });
-
 
     menuService.addMenuItem('topbar', {
       title: 'Controle de Usuários',
-      state: 'historic.admin',
+      state: 'users',
+      type: 'dropdown',
       roles: ['admin']
     });
 
+    menuService.addSubMenuItem('topbar', 'users', {
+      title: 'Criar Usuário',
+      state: 'users.create'
+    });
   }
 }());

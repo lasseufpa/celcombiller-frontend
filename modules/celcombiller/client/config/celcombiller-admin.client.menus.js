@@ -22,12 +22,12 @@
       state: 'credit.manual'
     });
     menuService.addSubMenuItem('topbar', 'credit', {
-      title: 'Listar Planos',
-      state: 'credit.schedule-list '
-    });
-    menuService.addSubMenuItem('topbar', 'credit', {
       title: 'Criar Plano',
       state: 'credit.schedule-create'
+    });
+    menuService.addSubMenuItem('topbar', 'credit', {
+      title: 'Listar Planos',
+      state: 'credit.schedule-list '
     });
   }
 }());

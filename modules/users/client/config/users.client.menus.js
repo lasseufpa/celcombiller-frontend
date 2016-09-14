@@ -10,10 +10,5 @@
   //Configuring the Users module
   function menuConfig(menuService) {
 
-    menuService.addMenuItem('topbar', {
-      title: 'Controle de Usuários',
-      state: 'historic.admin',
-      roles: ['admin']
-    });
   }
 }());

@@ -10,39 +10,22 @@
 
   function routeConfig($stateProvider) {
     $stateProvider
-      .state('admin.users', {
-        url: '/users',
-        templateUrl: 'modules/users/client/views/admin/list-users.client.view.html',
-        controller: 'UserListController',
+    .state('users', {
+        abstract: true,
+        url: '/user',
+        templateUrl: 'modules/users/client/views/admin/users.client.view.html',
+        redirectTo: 'credit.manual'
+      })
+      .state('users.create', {
+        url: '/create',
+        templateUrl: 'modules/users/client/views/admin/create.client.view.html',
+        controller: 'CreateUserController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Users List'
+          pageTitle: 'Criar Usuário',
+          roles: ['admin', 'coll']
         }
       })
-      .state('admin.user', {
-        url: '/users/:userId',
-        templateUrl: 'modules/users/client/views/admin/view-user.client.view.html',
-        controller: 'UserController',
-        controllerAs: 'vm',
-        resolve: {
-          userResolve: getUser
-        },
-        data: {
-          pageTitle: 'Edit {{ userResolve.displayName }}'
-        }
-      })
-      .state('admin.user-edit', {
-        url: '/users/:userId/edit',
-        templateUrl: 'modules/users/client/views/admin/edit-user.client.view.html',
-        controller: 'UserController',
-        controllerAs: 'vm',
-        resolve: {
-          userResolve: getUser
-        },
-        data: {
-          pageTitle: 'Edit User {{ userResolve.displayName }}'
-        }
-      });
 
     getUser.$inject = ['$stateParams', 'AdminService'];
 
