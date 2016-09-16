@@ -41,3 +41,8 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
+
+.icon-image{
+  max-width: 100%;
+  max-height: 100%;
+}
