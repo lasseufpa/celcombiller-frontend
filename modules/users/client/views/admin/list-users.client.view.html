@@ -12,14 +12,12 @@
   </div>
   <div class="row">
     <md-table-container class="dissable-checkbox-cell dissable-checkbox-column">
-      <table md-table md-row-select md-progress="vm.promise" ng-model="vm.selected" style="{display: none;}">
+      <table md-table md-row-select md-progress="vm.promise" ng-model="vm.selected" >
         <thead md-head md-order="mdorder">
           <th md-column md-order-by="_id "><span>Id</span></th>
           <th md-column md-order-by="name"><span>Nome</span></th>
           <th md-column><span>User Name</span></th>
           <th md-column md-order-by="level"><span>Tipo</span></th>
-          <!--           <th md-column><span>Add Voice Balance</span></th>
-          <th md-column><span>Add Data Balance</span></th> -->
         </thead>
         <tbody md-body>
           <tr md-row md-select="item.username"  md-on-select="vm.edit" md-auto-select ng-model="vm.selected" ng-repeat="item in vm.filteredItems  | filter:vm.filter | orderBy: mdorder">

@@ -22,11 +22,11 @@
       state: 'users.create',
       roles: ['admin','coll']
     });
-    menuService.addSubMenuItem('topbar','users',{
-      title: 'Editar Usuário',
-      state: 'users.edit',
-      roles: ['admin','coll']
-    });
+    // menuService.addSubMenuItem('topbar','users',{
+    //   title: 'Editar Usuário',
+    //   state: 'users.edit',
+    //   roles: ['admin','coll']
+    // });
     menuService.addSubMenuItem('topbar','users',{
       title: 'Listar Usuários',
       state: 'users.list',

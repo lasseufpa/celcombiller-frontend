@@ -27,7 +27,7 @@
         }
       })
       .state('users.edit', {
-        url: '/edit',
+        url: '/edit/:username',
         templateUrl: 'modules/users/client/views/admin/edit-user.client.view.html',
         controller: 'EditUserController',
         controllerAs: 'vm',

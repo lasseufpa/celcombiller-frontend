@@ -32,7 +32,9 @@
 
     function edit() {
       console.log(vm.selected)
-      $state.go('users.create')
+      $state.go('users.edit', {
+        username: vm.selected[0]
+      });
     }
   }
 }());

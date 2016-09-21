@@ -1,14 +1,16 @@
-(function () {
+(function() {
   'use strict';
 
   angular
     .module('users.admin')
     .controller('EditUserController', EditUserController);
 
-  EditUserController.$inject = [];
+  EditUserController.$inject = ['$stateParams', 'Authentication'];
 
-  function EditUserController() {
+  function EditUserController($stateParams, Authentication) {
+
+    var vm = this;
     
   }
-  
+
 }());
