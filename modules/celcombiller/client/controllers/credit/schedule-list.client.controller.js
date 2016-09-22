@@ -190,14 +190,15 @@
           schedule_user.user_id = crl.selectedItem._id;
           schedule_user.schedule_id = vm.selected[0]._id;
           schedule_user.count = crl.number;
+          vm.user = crl.selectedItem;
+          vm.number = crl.number;
           schedule_user.$save(function(resp, headers) {
+            vm.count = 0;
             vm.alertOk();
             $mdDialog.hide();
           }, function(err) {
             // if the user is already in the schedule ask the user if he wants to increase the remain time
             if (err.status === 409) {
-              vm.user = crl.selectedItem;
-              vm.number = crl.number;
               // if the count of remaining month is zero we dont ask.
               if (vm.number === 0) {
                 vm.patchUserSchedule(vm.selected[0]._id, vm.user._id, vm.number + vm.count);

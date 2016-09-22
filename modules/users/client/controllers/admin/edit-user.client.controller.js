@@ -20,10 +20,11 @@
     };
 
     var _http = UserAccessService.get({
-      username: $stateParams.username
+      user: $stateParams.username
     }).$promise;
 
     _http.then(function(res) {
+      console.log(res)
       vm.level = res.level;
       vm.name = res.name;
       vm.cpf = pad(res.cpf);
@@ -44,7 +45,39 @@
         fields.push('level');
         values.push(vm.level);
       }
-      PatchUserService($stateParams.username, fields, values);
+      if(vm.name !== vm.res.name){
+        fields.push('name');
+        values.push(vm.name);
+      }
+      if(vm.address !== vm.res.address){
+        fields.push('address');
+        values.push(vm.address);
+      }
+      if (vm.editPasswod) {
+        fields.push('password');
+        values.push(vm.password);
+      }
+
+      if(parseInt(vm.cpf) !== vm.res.cpf){
+        fields.push('cpf');
+        values.push(vm.cpf);
+      }
+      if(vm.username !== vm.res.username){
+        fields.push('username');
+        values.push(vm.username);
+      }
+      if(vm.clid !== vm.res.clid){
+        fields.push('clid');
+        values.push(vm.clid);
+      }
+      if(vm.imsi !== vm.res.imsi){
+        fields.push('imsi');
+        values.push(vm.imsi);
+      }
+
+
+
+      //PatchUserService($stateParams.username, fields, values);
 
     }
 

@@ -30,16 +30,10 @@
     vm.onChange = onChange;
 
     function onChange() {
-      console.log('change')
-      console.log(vm.kind)
       if (parseInt(vm.kind) === 1) {
-              console.log('no if')
-
         vm.unities = voiceunities;
         vm.values = voicevalues;
       } else if (parseInt(vm.kind) === 2) {
-      console.log('no else')
-
         vm.unities = dataunities;
         vm.values = datavalues;
       }
@@ -47,7 +41,6 @@
 
     function save() {
       addSchedule(vm.name, vm.day, vm.value * vm.unity, vm.kind);
-
       clean();
     }
 
