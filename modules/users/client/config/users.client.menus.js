@@ -7,8 +7,9 @@
 
   menuConfig.$inject = ['menuService'];
 
-  //Configuring the Users module
+  // Configuring the Users module
   function menuConfig(menuService) {
 
   }
 }());
+

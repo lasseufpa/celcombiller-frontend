@@ -20,8 +20,7 @@
           roles: ['admin']
         }
       })
-
-    .state('credit', {
+      .state('credit', {
         abstract: true,
         url: '/credit',
         templateUrl: 'modules/celcombiller/client/views/credit/credit.client.view.html',
@@ -49,7 +48,6 @@
       }
     })
 
-
     .state('credit.schedule-create', {
       url: '/schedule/create',
       templateUrl: 'modules/celcombiller/client/views/credit/create-schedule.client.view.html',
@@ -60,7 +58,6 @@
         roles: ['admin', 'coll']
       }
     });
-
 
     getUser.$inject = ['$stateParams', 'AdminService'];
 

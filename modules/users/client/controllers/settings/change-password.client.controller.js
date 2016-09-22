@@ -18,7 +18,7 @@
         alertEqual();
         return;
       } else {
-        var _http = PatchUserService(vm.user.username, ['password'],[ vm.password1]);
+        var _http = PatchUserService(vm.user.username, ['password'], [vm.password1]);
 
         _http.then(function(resp, header) {
           alertOk();
@@ -74,7 +74,5 @@
         .targetEvent(ev)
       );
     }
-
-
   }
 }());

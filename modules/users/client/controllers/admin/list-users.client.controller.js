@@ -31,7 +31,9 @@
     }
 
     function edit() {
-      $state.go('users.edit',{username: vm.selected})
+      $state.go('users.edit', {
+        username: vm.selected
+      });
     }
   }
 }());

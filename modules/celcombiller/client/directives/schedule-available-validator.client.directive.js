@@ -8,32 +8,35 @@
     .module('celcombiller.credit')
     .directive('checkScheduleValidator', checkScheduleValidator);
 
-  checkScheduleValidator.$inject = ['$http', '$q','MyIP'];
+  checkScheduleValidator.$inject = ['$http', '$q', 'MyIP'];
 
-  function checkScheduleValidator($http, $q,MyIP) {
+  function checkScheduleValidator($http, $q, MyIP) {
 
     var directive = {
       require: 'ngModel',
       link: link
-
     };
 
     return directive;
 
     function link(scope, element, attrs, ngModel) {
       // ngModel.$validators.available = function(){return false};
-
       ngModel.$asyncValidators.notavaliable = check;
 
       function check(value) {
         var atribute = attrs.checkScheduleValidator;
-        var filters = [{ 'name': atribute, 'op': 'eq', 'val': value }];
-        var json = JSON.stringify({ 'filters': filters });
-        var _http = $http.jsonp('http://'+MyIP+':5000/api/schedule?callback=JSON_CALLBACK', {
+        var filters = [{
+          'name': atribute,
+          'op': 'eq',
+          'val': value
+        }];
+        var json = JSON.stringify({
+          'filters': filters
+        });
+        var _http = $http.jsonp('http://' + MyIP + ':5000/api/schedule?callback=JSON_CALLBACK', {
           params: {
             'q': json
           }
-
         }).then(function success(data) {
           if (data.data.data.objects.length === 0) {
             // return data.data.data.objects[0]
@@ -48,7 +51,6 @@
         });
         return _http;
       }
-
     }
   }
 }());

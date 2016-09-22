@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   // Setting up route
@@ -10,7 +10,7 @@
 
   function routeConfig($stateProvider) {
     $stateProvider
-    .state('users', {
+      .state('users', {
         abstract: true,
         url: '/users',
         templateUrl: 'modules/users/client/views/admin/users.client.view.html',
@@ -45,7 +45,7 @@
           pageTitle: 'Listar Usuários',
           roles: ['admin']
         }
-      })
+      });
 
     getUser.$inject = ['$stateParams', 'AdminService'];
 

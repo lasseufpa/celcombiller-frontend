@@ -13,13 +13,24 @@
 
     vm.title = 'Criação de plano';
 
-    vm.kinds = { 'Voz': 1, 'Dados': 2 }; // 'Voz/Dados': 3 };
+    vm.kinds = {
+      'Voz': 1,
+      'Dados': 2
+    }; // 'Voz/Dados': 3 };
 
     vm.kind = 1;
 
-    var dataunities = { 'KB': 1024, 'MB': 1024 * 1024, 'GB': 1024 * 1024 * 1024 };
+    var dataunities = {
+      'KB': 1024,
+      'MB': 1024 * 1024,
+      'GB': 1024 * 1024 * 1024
+    };
     var datavalues = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512];
-    var voiceunities = { 'Segundos': 1, 'Minutos': 60, 'Horas': 60 * 60 };
+    var voiceunities = {
+      'Segundos': 1,
+      'Minutos': 60,
+      'Horas': 60 * 60
+    };
     var voicevalues = [1, 5, 10, 15, 30, 45];
 
     vm.unities = voiceunities;
@@ -30,10 +41,10 @@
     vm.onChange = onChange;
 
     function onChange() {
-      if (parseInt(vm.kind) === 1) {
+      if (parseInt(vm.kind, 10) === 1) {
         vm.unities = voiceunities;
         vm.values = voicevalues;
-      } else if (parseInt(vm.kind) === 2) {
+      } else if (parseInt(vm.kind, 10) === 2) {
         vm.unities = dataunities;
         vm.values = datavalues;
       }
