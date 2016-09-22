@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   // Setting up route
@@ -10,39 +10,54 @@
 
   function routeConfig($stateProvider) {
     $stateProvider
-      .state('celcombiller.admin.users', {
-        url: '/users',
-        templateUrl: 'modules/users/client/views/admin/list-users.client.view.html',
-        controller: 'UserListController',
+      .state('register', {
+        url: '/register',
+        templateUrl: 'modules/celcombiller/client/views/register.client.view.html',
+        controller: 'RegisterController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Users List'
+          pageTitle: 'Cadastro de Usuário',
+          roles: ['admin']
         }
       })
-      .state('celcombiller.admin.user', {
-        url: '/users/:userId',
-        templateUrl: 'modules/users/client/views/admin/view-user.client.view.html',
-        controller: 'UserController',
+      .state('credit', {
+        abstract: true,
+        url: '/credit',
+        templateUrl: 'modules/celcombiller/client/views/credit/credit.client.view.html',
+        redirectTo: 'credit.manual'
+      })
+      .state('credit.manual', {
+        url: '/manual',
+        templateUrl: 'modules/celcombiller/client/views/credit/manual.client.view.html',
+        controller: 'CreditManualController',
         controllerAs: 'vm',
-        resolve: {
-          userResolve: getUser
-        },
         data: {
-          pageTitle: 'Edit {{ userResolve.displayName }}'
+          pageTitle: 'Adição Manual de Crédito',
+          roles: ['admin', 'coll']
         }
       })
-      .state('celcombiller.admin.user-edit', {
-        url: '/users/:userId/edit',
-        templateUrl: 'modules/users/client/views/admin/edit-user.client.view.html',
-        controller: 'UserController',
-        controllerAs: 'vm',
-        resolve: {
-          userResolve: getUser
-        },
-        data: {
-          pageTitle: 'Edit User {{ userResolve.displayName }}'
-        }
-      });
+
+    .state('credit.schedule-list', {
+      url: '/schedule/list',
+      templateUrl: 'modules/celcombiller/client/views/credit/schedule-list.client.view.html',
+      controller: 'ScheduleListController',
+      controllerAs: 'vm',
+      data: {
+        pageTitle: 'Listar Planos',
+        roles: ['admin', 'coll']
+      }
+    })
+
+    .state('credit.schedule-create', {
+      url: '/schedule/create',
+      templateUrl: 'modules/celcombiller/client/views/credit/create-schedule.client.view.html',
+      controller: 'CreateScheduleController',
+      controllerAs: 'vm',
+      data: {
+        pageTitle: 'Criar Planos',
+        roles: ['admin', 'coll']
+      }
+    });
 
     getUser.$inject = ['$stateParams', 'AdminService'];
 

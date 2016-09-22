@@ -1,21 +1,35 @@
 <section>
   <div class="page-header">
-    <div class="row">
-      <div class="col-md-4">
-        <h1>Users</h1>
-      </div>
-      <div class="col-md-4" style="margin-top: 2em">
-        <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Search" ng-change="vm.figureOutItemsToDisplay()" />
-      </div>
-    </div>
+    <h1>{{vm.title}}</h1>
   </div>
-  <div class="list-group">
-    <a ng-repeat="user in vm.pagedItems" ui-sref="admin.user({userId: user._id})" class="list-group-item">
-      <h4 class="list-group-item-heading" ng-bind="user.username"></h4>
-      <p class="list-group-item-text pull-right small" ng-bind="user.roles"></p>
-      <p class="list-group-item-text" ng-bind="user.email"></p>
-    </a>
+  <div class="md-padding">
+    <md-content layout-gt-sm="row" layout-padding>
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Filtro</label>
+        <input name="name" type="string" ng-model="vm.vfilter" aria-label="amount">
+      </md-input-container>
+    </md-content>
   </div>
-
-  <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+  <div class="row">
+    <md-table-container class="dissable-checkbox-cell dissable-checkbox-column">
+      <table md-table md-row-select md-progress="vm.promise" ng-model="vm.selected" >
+        <thead md-head md-order="mdorder">
+          <th md-column md-order-by="_id "><span>Id</span></th>
+          <th md-column md-order-by="name"><span>Nome</span></th>
+          <th md-column><span>User Name</span></th>
+          <th md-column md-order-by="level"><span>Tipo</span></th>
+        </thead>
+        <tbody md-body>
+          <tr md-row md-select="item.username"  md-on-select="vm.edit" md-auto-select ng-model="vm.selected" ng-repeat="item in vm.filteredItems  | filter:vm.filter | orderBy: mdorder">
+            <td md-cell >{{item._id}}</td>
+            <td md-cell>{{item.name}}</td>
+            <td md-cell>{{item.username}}</td>
+            <td md-cell ng-if="item.level == 0">Administrador</td>
+            <td md-cell ng-if="item.level == 1">Usuário</td>
+            <td md-cell ng-if="item.level == 2">Colaborador</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </div>
 </section>

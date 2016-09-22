@@ -34,3 +34,9 @@
   min-height: 150px;
   max-height: 150px;
 }
+
+.dissable-checkbox-cell table[md-table] .md-checkbox-cell,
+.dissable-checkbox-column table[md-table] .md-checkbox-column
+{
+  display: none;
+}

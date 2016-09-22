@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('celcombiller.user')
-    .controller('RegisterController', RegisterController);
+    .module('users.admin')
+    .controller('CreateUserController', CreateUserController);
 
-  RegisterController.$inject = ['UserAccessService', '$mdDialog'];
+  CreateUserController.$inject = ['UserAccessService', '$mdDialog'];
 
-  function RegisterController(UserAccessService, $mdDialog) {
+  function CreateUserController(UserAccessService, $mdDialog) {
 
     var vm = this;
     vm.title = 'Cadastro de Usuário';

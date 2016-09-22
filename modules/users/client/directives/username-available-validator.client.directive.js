@@ -5,7 +5,7 @@
   // TODO: It is returning the entire object, it can be dangerous.
 
   angular
-    .module('celcombiller.credit')
+    .module('users')
     .directive('checkAvailableValidator', checkAvailableValidator);
 
   checkAvailableValidator.$inject = ['$http', '$q', 'MyIP'];

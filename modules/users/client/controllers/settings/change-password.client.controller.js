@@ -17,19 +17,20 @@
       if (vm.current === vm.password1) {
         alertEqual();
         return;
-      }else{
-        var _http = PatchUserService(vm.user.username,'password',vm.password1);
+      } else {
+        var _http = PatchUserService(vm.user.username, ['password'], [vm.password1]);
 
-        _http.then((resp,header)=>{
+        _http.then(function(resp, header) {
           alertOk();
 
-        },(err)=>{
-          alertError()
+        }, function(err) {
+          alertError();
         });
       }
-      cleanFields()
+      cleanFields();
     }
-    function cleanFields(){
+
+    function cleanFields() {
       vm.current = '';
       vm.password1 = '';
       vm.password2 = '';
@@ -47,6 +48,7 @@
         .targetEvent(ev)
       );
     }
+
     function alertOk(ev) {
       $mdDialog.show(
         $mdDialog.alert()
@@ -72,7 +74,5 @@
         .targetEvent(ev)
       );
     }
-
-
   }
 }());

@@ -1,42 +1,39 @@
-(function () {
+(function() {
   'use strict';
 
   angular
     .module('users.admin')
     .controller('UserListController', UserListController);
 
-  UserListController.$inject = ['$scope', '$filter', 'AdminService'];
+  UserListController.$inject = ['UserAccessService', '$state'];
 
-  function UserListController($scope, $filter, AdminService) {
+  function UserListController(UserAccessService, $state) {
     var vm = this;
-    vm.buildPager = buildPager;
-    vm.figureOutItemsToDisplay = figureOutItemsToDisplay;
-    vm.pageChanged = pageChanged;
+    vm.title = 'Lista de Usuários';
+    vm.vfilter = '';
+    vm.array = null;
+    vm.filter = filter;
+    vm.selected = [];
+    vm.edit = edit;
 
-    AdminService.query(function (data) {
-      vm.users = data;
-      vm.buildPager();
-    });
+    vm.promise = UserAccessService.query(function(data) {
+      vm.array = vm.filteredItems = data.objects;
+    }).$promise;
 
-    function buildPager() {
-      vm.pagedItems = [];
-      vm.itemsPerPage = 15;
-      vm.currentPage = 1;
-      vm.figureOutItemsToDisplay();
+    function filter(item) {
+      if ((String(item._id).indexOf(vm.vfilter) >= 0) ||
+        (String(item.name).indexOf(vm.vfilter) >= 0) ||
+        (String(item.day).indexOf(vm.vfilter) >= 0)) {
+        return 1;
+      } else {
+        return 0;
+      }
     }
 
-    function figureOutItemsToDisplay() {
-      vm.filteredItems = $filter('filter')(vm.users, {
-        $: vm.search
+    function edit() {
+      $state.go('users.edit', {
+        username: vm.selected
       });
-      vm.filterLength = vm.filteredItems.length;
-      var begin = ((vm.currentPage - 1) * vm.itemsPerPage);
-      var end = begin + vm.itemsPerPage;
-      vm.pagedItems = vm.filteredItems.slice(begin, end);
-    }
-
-    function pageChanged() {
-      vm.figureOutItemsToDisplay();
     }
   }
 }());

@@ -1,40 +1,92 @@
 <section>
   <div class="page-header">
-    <h1>User <span ng-bind="vm.user.username"></span></h1>
+    <h1>{{vm.title}}</h1>
   </div>
-  <div class="col-md-12">
-    <form name="vm.userForm" ng-submit="vm.update(vm.userForm.$valid)" novalidate>
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="vm.user.firstName" placeholder="First Name" required />
-          <div ng-messages="vm.userForm.firstName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">First name is required.</p>
+  <div layout="column" ng-cloak class="md-inline-form">
+    <md-content layout-padding>
+      <div>
+        <form name="form">
+          <div>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Nível de Acesso</label>
+              <md-select aria-label="Nível" ng-model="vm.level">
+                <md-option ng-repeat="(level,value) in vm.levels" value="{{value}}">
+                  {{level}}
+                </md-option>
+              </md-select>
+            </md-input-container>
           </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="vm.user.lastName" placeholder="Last Name" required />
-          <div ng-messages="vm.userForm.lastName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Last name is required.</p>
+          <div layout-gt-xs="row">
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Nome</label>
+              <input name="name" ng-model="vm.name">
+              <div ng-messages="form.name.$error">
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex flex-gt-xs="30">
+              <label>CPF</label>
+              <input ng-model-options="{ debounce : {  blur : 0 } }" name="cpf" ng-model="vm.cpf" ui-mask="999.999.999-99" ui-mask-placeholder ui-mask-placeholder-char="_">
+              <div ng-messages="form.cpf.$error" ng-show="form.cpf.$dirty" md-auto-hide="false" ng-if="form.cpf.$touched" role="alert">
+                <div ng-message="notavaliable"> CPF já usado.</div>
+              </div>
+            </md-input-container>
           </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="roles">Roles</label>
-          <div class="controls">
-            <input class="form-control" type="text" name="roles" ng-model="vm.user.roles" id="roles" ng-list required />
-            <div ng-messages="vm.userForm.roles.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">At least one role is required.</p>
-            </div>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Endereço</label>
+              <input ng-model="vm.address">
+            </md-input-container>
           </div>
-        </div>
-        <div class="form-group">
-          <input type="submit" value="Update" class="btn btn-default">
-        </div>
-        <div ng-show="vm.error" class="text-danger">
-          <strong ng-bind="vm.error"></strong>
-        </div>
-      </fieldset>
-    </form>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Username</label>
+              <input ng-model-options="{ debounce : { 'default' : 500, blur : 0 } }" name="username" ng-model="vm.username">
+              <div ng-messages="form.username.$error">
+                <div ng-message="notavaliable"> Username não disponível.</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Número</label>
+              <input name="clid" ng-model="vm.clid" ui-mask="9999-99999" ui-mask-placeholder ui-mask-placeholder-char="_" ng-model-options="{ debounce : {  blur : 0 } }">
+              <div ng-messages="form.clid.$error" ng-show="form.clid.$dirty" md-auto-hide="false" ng-if="form.clid.$touched" role="alert">
+                <div ng-message="notavaliable">Número não disponível.</div>
+              </div>
+            </md-input-container>
+          </div>
+          <div class="md-block" layout-gt-xs="row">
+
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Senha</label>
+              <input name="password" type="password" ng-model="vm.password" ng-disabled="!vm.editPasswod" placeholder="******">
+              <div ng-messages="form.password.$error">
+              </div>
+            </md-input-container>
+            <md-input-container>
+              <md-switch ng-model="vm.editPasswod"></md-switch>
+            </md-input-container>
+          </div>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>IMSI</label>
+              <input ng-model-options="{ debounce : {  blur : 0 } }" name="imsi" ui-mask="999999999999999" ui-mask-placeholder ui-mask-placeholder-char="_" ng-model="vm.imsi">
+              <div ng-messages="form.imsi.$error">
+                <div ng-message="notavaliable">IMSI inválido.</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Ki</label>
+              <input disabled name="ki" ui-mask="********************************" ng-model="vm.ki">
+            </md-input-container>
+          </div>
+          <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button type="submit" ng-disabled="!form.$valid" class="md-raised md-primary" ng-click="vm.save();form.$setPristine();
+          form.$setUntouched();">
+              Salvar
+            </md-button>
+          </md-dialog-actions>
+        </form>
+      </div>
+    </md-content>
   </div>
 </section>
