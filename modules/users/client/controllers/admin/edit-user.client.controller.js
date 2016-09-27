@@ -5,9 +5,9 @@
     .module('users.admin')
     .controller('EditUserController', EditUserController);
 
-  EditUserController.$inject = ['$stateParams', 'UserAccessService', 'PatchUserService', '$http', 'MyIP', '$q', '$mdDialog'];
+  EditUserController.$inject = ['$stateParams', 'UserAccessService', 'PatchUserService', '$http', 'MyIP', '$q', '$mdDialog', '$state'];
 
-  function EditUserController($stateParams, UserAccessService, PatchUserService, $http, MyIP, $q, $mdDialog) {
+  function EditUserController($stateParams, UserAccessService, PatchUserService, $http, MyIP, $q, $mdDialog, $state) {
     var vm = this;
     vm.save = save;
 
@@ -42,6 +42,7 @@
       var promises = [];
       var errors = [];
       var error = false;
+      var changeUsername = false;
 
       if (vm.level !== vm.res.level) {
         fields.push('level');
@@ -78,6 +79,7 @@
             error = true;
             errors.push('username');
           } else {
+            changeUsername = true;
             fields.push('username');
             values.push(vm.username);
           }
@@ -113,9 +115,21 @@
           alertEqual(errors);
         } else {
           PatchUserService($stateParams.username, fields, values).then(function success(res) {
+            vm.res = res.data;
             alertOk();
+            // $state.go('users.edit', {
+            //   username: res.data.username
+            // });
           }, function error(res) {
-            alertError();
+            // If we change the username we got an error because it is our primary key
+            if (res.status === 404 && changeUsername) {
+              alertOk();
+              $state.go('users.edit', {
+                username: vm.username
+              });
+            } else {
+              alertError();
+            }
           });
         }
       });

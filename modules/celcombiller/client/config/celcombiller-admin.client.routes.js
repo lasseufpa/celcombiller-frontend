@@ -10,16 +10,6 @@
 
   function routeConfig($stateProvider) {
     $stateProvider
-      .state('register', {
-        url: '/register',
-        templateUrl: 'modules/celcombiller/client/views/register.client.view.html',
-        controller: 'RegisterController',
-        controllerAs: 'vm',
-        data: {
-          pageTitle: 'Cadastro de Usuário',
-          roles: ['admin']
-        }
-      })
       .state('credit', {
         abstract: true,
         url: '/credit',
@@ -36,28 +26,26 @@
           roles: ['admin', 'coll']
         }
       })
-
-    .state('credit.schedule-list', {
-      url: '/schedule/list',
-      templateUrl: 'modules/celcombiller/client/views/credit/schedule-list.client.view.html',
-      controller: 'ScheduleListController',
-      controllerAs: 'vm',
-      data: {
-        pageTitle: 'Listar Planos',
-        roles: ['admin', 'coll']
-      }
-    })
-
-    .state('credit.schedule-create', {
-      url: '/schedule/create',
-      templateUrl: 'modules/celcombiller/client/views/credit/create-schedule.client.view.html',
-      controller: 'CreateScheduleController',
-      controllerAs: 'vm',
-      data: {
-        pageTitle: 'Criar Planos',
-        roles: ['admin', 'coll']
-      }
-    });
+      .state('credit.schedule-list', {
+        url: '/schedule/list',
+        templateUrl: 'modules/celcombiller/client/views/credit/schedule-list.client.view.html',
+        controller: 'ScheduleListController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Listar Planos',
+          roles: ['admin', 'coll']
+        }
+      })
+      .state('credit.schedule-create', {
+        url: '/schedule/create',
+        templateUrl: 'modules/celcombiller/client/views/credit/create-schedule.client.view.html',
+        controller: 'CreateScheduleController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Criar Planos',
+          roles: ['admin', 'coll']
+        }
+      });
 
     getUser.$inject = ['$stateParams', 'AdminService'];
 
