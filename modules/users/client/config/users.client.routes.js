@@ -13,7 +13,7 @@
     $stateProvider
       .state('settings', {
         abstract: true,
-        url: '/settings',
+        url: '/account',
         templateUrl: 'modules/users/client/views/settings/settings.client.view.html',
         controller: 'SettingsController',
         controllerAs: 'vm',
@@ -21,33 +21,33 @@
           roles: ['user', 'admin']
         }
       })
-      // .state('settings.profile', {
-      //   url: '/profile',
-      //   templateUrl: 'modules/users/client/views/settings/edit-profile.client.view.html',
-      //   controller: 'EditProfileController',
-      //   controllerAs: 'vm',
-      //   data: {
-      //     pageTitle: 'Settings'
-      //   }
-      // })
+      .state('settings.profile', {
+        url: '/profile',
+        templateUrl: 'modules/users/client/views/settings/profile.client.view.html',
+        controller: 'ProfileController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Settings'
+        }
+      })
       .state('settings.password', {
         url: '/password',
         templateUrl: 'modules/users/client/views/settings/change-password.client.view.html',
         controller: 'ChangePasswordController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings password'
+          pageTitle: 'Redefinir Senha'
         }
       })
-      // .state('settings.accounts', {
-      //   url: '/accounts',
-      //   templateUrl: 'modules/users/client/views/settings/manage-social-accounts.client.view.html',
-      //   controller: 'SocialAccountsController',
-      //   controllerAs: 'vm',
-      //   data: {
-      //     pageTitle: 'Settings accounts'
-      //   }
-      // })
+      .state('settings.schedules', {
+        url: '/schedules',
+        templateUrl: 'modules/users/client/views/settings/user-schedules.client.view.html',
+        controller: 'SocialAccountsController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Settings accounts'
+        }
+      })
       // .state('settings.picture', {
       //   url: '/picture',
       //   templateUrl: 'modules/users/client/views/settings/change-profile-picture.client.view.html',

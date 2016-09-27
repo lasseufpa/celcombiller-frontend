@@ -19,15 +19,15 @@
       roles: ['user']
     });
 
-    // menuService.addSubMenuItem('account', 'settings', {
-    //   title: 'Edit Profile',
-    //   state: 'settings.profile'
-    // });
+    menuService.addSubMenuItem('account', 'settings', {
+      title: 'Informações da Conta',
+      state: 'settings.profile'
+    });
 
-    // menuService.addSubMenuItem('account', 'settings', {
-    //   title: 'Edit Profile Picture',
-    //   state: 'settings.picture'
-    // });
+    menuService.addSubMenuItem('account', 'settings', {
+      title: 'Planos',
+      state: 'settings.schedules'
+    });
 
     menuService.addSubMenuItem('account', 'settings', {
       title: 'Redefinir Senha',
