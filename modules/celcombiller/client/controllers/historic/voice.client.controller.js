@@ -21,8 +21,9 @@
     vm.title = 'Histórico de Voz'
     vm.userId = Authentication.user.id;
 
-    vm.historic = [];
-    vm.options = {'Chamadas e Recargas' : 0 , 'Chamadas' : 1 ,'Recargas': 2}
+    vm.historic = vm.filteredHistoric = [];
+    vm.filter = filter;
+    vm.options = {'Ligações e Recargas' : 0 , 'Ligações' : 1 ,'Recargas': 2}
     vm.selected = 0;
     
     vm.dateEnd = new Date();
@@ -36,16 +37,12 @@
     vm.promise = createList();
 
     vm.promise.then(res => {
-      console.log(res.data.data)
-      vm.historic = res.data.data.objects;
+      vm.historic = vm.filteredHistoric = res.data.data.objects;
     })
-    
-    
     function refreshList(){
       vm.promise = createList();
 
       vm.promise.then(res => {
-        console.log(res.data.data)
         vm.historic = res.data.data.objects;
       })
     }
@@ -76,6 +73,16 @@
       return _http;
     }
 
-
+    function filter(item) {
+      if (parseInt(vm.selected,10) === 0 ) {
+        return 1;
+      } else if (parseInt(vm.selected,10) === 1 && item.to_user_id != null ) {
+        return 1;
+      }else if(parseInt(vm.selected,10) === 2 && item.to_user_id == null ){
+        return 1;
+      }else {
+        return 0;
+      }
+    }
   }
 }());

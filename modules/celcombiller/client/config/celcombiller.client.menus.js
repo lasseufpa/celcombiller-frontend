@@ -19,9 +19,9 @@
       title: 'Histórico de Voz',
       state: 'historic.voice'
     });
-    menuService.addSubMenuItem('topbar', 'historic', {
-      title: 'Histórico de Dados',
-      state: 'historic.data'
-    });
+    // menuService.addSubMenuItem('topbar', 'historic', {
+    //   title: 'Histórico de Dados',
+    //   state: 'historic.data'
+    // });
   }
 }());
