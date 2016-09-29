@@ -47,6 +47,7 @@
 .info-underline h5
 {
   border-bottom: 1px solid;
+  border-color: grey;
   border-color: rgba(0,0,0,0.12);
-  padding-right: 0px;
+  padding-right: 0;
 }

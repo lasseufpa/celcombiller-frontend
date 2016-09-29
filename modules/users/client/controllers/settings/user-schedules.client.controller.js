@@ -3,11 +3,11 @@
 
   angular
     .module('users')
-    .controller('SocialAccountsController', SocialAccountsController);
+    .controller('UserSchedulesController', UserSchedulesController);
 
-  SocialAccountsController.$inject = ['$scope', '$http', 'Authentication'];
+  UserSchedulesController.$inject = ['$scope', '$http', 'Authentication'];
 
-  function SocialAccountsController($scope, $http, Authentication) {
+  function UserSchedulesController($scope, $http, Authentication) {
     var vm = this;
 
     vm.user = Authentication.user;

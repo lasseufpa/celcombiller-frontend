@@ -42,10 +42,10 @@
       .state('settings.schedules', {
         url: '/schedules',
         templateUrl: 'modules/users/client/views/settings/user-schedules.client.view.html',
-        controller: 'SocialAccountsController',
+        controller: 'UserSchedulesController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings accounts'
+          pageTitle: 'Planos'
         }
       })
       // .state('settings.picture', {

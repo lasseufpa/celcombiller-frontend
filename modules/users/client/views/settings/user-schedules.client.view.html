@@ -1,3 +1,35 @@
-<section class="row">
-listar planos do usuario
+<section>
+  <div class="row">
+    <md-table-container>
+      <table md-table md-row-select md-progress="vm.promise" ng-model="vm.selected">
+        <thead md-head md-order="mdorder">
+          <th md-column md-order-by="_id "><span>Id</span></th>
+          <th md-column md-order-by="name"><span>Nome</span></th>
+          <th md-column md-numeric><span>Dia</span></th>
+          <th md-column md-numeric><span>Valor</span></th>
+          <th md-column><span>Tipo</span></th>
+          <!--           <th md-column><span>Add Voice Balance</span></th>
+          <th md-column><span>Add Data Balance</span></th> -->
+        </thead>
+        <tbody md-body>
+          <tr md-row md-select="item" md-auto-select ng-model="vm.selected" ng-repeat="item in vm.filteredItems  | filter:vm.filter | orderBy: mdorder">
+            <td md-cell>{{item._id}}</td>
+            <td md-cell>{{item.name}}</td>
+            <td md-cell>{{item.day}}</td>
+            <!-- <td md-cell>{{item.value}}</td> -->
+            <td md-cell ng-if="(item.value < 119) && (item.kind == 1)">{{item.value |number:2}} Seg.</td>
+            <td md-cell ng-if="(item.value >= 120 ) && (item.value < 7199 ) && (item.kind == 1)">{{item.value/60 |number:2}} Min.</td>
+            <td md-cell ng-if="(item.value >= 7200) && (item.kind == 1) ">{{item.value/3600|number:2}} Horas</td>
+            <td md-cell ng-if="(item.value < 2047) && (item.kind == 2) ">{{item.value | number:2}} B</td>
+            <td md-cell ng-if="(item.value >= 2048 ) && (item.value < 2097151) && (item.kind == 2) ">{{item.value/1024 | number:2}} KB</td>
+            <td md-cell ng-if="(item.value >= 2097152) && (item.value < 2147483647) && (item.kind == 2) ">{{item.value/1048576 | number:2}} MB</td>
+            <td md-cell ng-if="(item.value >= 2147483648) && (item.kind == 2) ">{{item.value/1073741824 | number:4}} GB</td>
+            <td md-cell ng-if="item.kind == 1 "> Voz</td>
+            <td md-cell ng-if="item.kind == 2 "> Dados</td>
+            <td md-cell ng-if="item.kind == 3 "> Voz/Dados</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </div>
 </section>
