@@ -10,6 +10,7 @@
   function EditUserController($stateParams, UserAccessService, PatchUserService, $http, MyIP, $q, $mdDialog, $state) {
     var vm = this;
     vm.save = save;
+    var patchUserService = PatchUserService;
 
     vm.title = 'Editar usuário ' + $stateParams.username;
 
@@ -114,7 +115,7 @@
         if (error) {
           alertEqual(errors);
         } else {
-          PatchUserService($stateParams.username, fields, values).then(function success(res) {
+          patchUserService($stateParams.username, fields, values).then(function success(res) {
             vm.res = res.data;
             alertOk();
             // $state.go('users.edit', {

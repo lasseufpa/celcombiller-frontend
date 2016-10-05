@@ -1,20 +1,19 @@
 <section>
   <div class="row">
     <md-table-container>
-      <table md-table md-row-select md-progress="vm.promise" ng-model="vm.selected">
+      <table md-table md-progress="vm.promise" ng-model="vm.selected">
         <thead md-head md-order="mdorder">
-          <th md-column md-order-by="_id "><span>Id</span></th>
-          <th md-column md-order-by="name"><span>Nome</span></th>
-          <th md-column md-numeric><span>Dia</span></th>
+          <th md-column md-order-by="schedule_name"><span>Nome</span></th>
+          <th md-column md-numeric md-order-by="day"><span>Dia</span></th>
           <th md-column md-numeric><span>Valor</span></th>
-          <th md-column><span>Tipo</span></th>
+          <th md-column md-order-by="kind"><span>Tipo</span></th>
+          <th md-column><span>Restante</span></th>
           <!--           <th md-column><span>Add Voice Balance</span></th>
           <th md-column><span>Add Data Balance</span></th> -->
         </thead>
         <tbody md-body>
-          <tr md-row md-select="item" md-auto-select ng-model="vm.selected" ng-repeat="item in vm.filteredItems  | filter:vm.filter | orderBy: mdorder">
-            <td md-cell>{{item._id}}</td>
-            <td md-cell>{{item.name}}</td>
+          <tr md-row ng-model="vm.selected" ng-repeat="item in vm.items | orderBy: mdorder" ng-if="item.count > 0">
+            <td md-cell>{{item.schedule_name}}</td>
             <td md-cell>{{item.day}}</td>
             <!-- <td md-cell>{{item.value}}</td> -->
             <td md-cell ng-if="(item.value < 119) && (item.kind == 1)">{{item.value |number:2}} Seg.</td>
@@ -27,6 +26,7 @@
             <td md-cell ng-if="item.kind == 1 "> Voz</td>
             <td md-cell ng-if="item.kind == 2 "> Dados</td>
             <td md-cell ng-if="item.kind == 3 "> Voz/Dados</td>
+            <td md-cell> {{item.count}} Meses </td>
           </tr>
         </tbody>
       </table>

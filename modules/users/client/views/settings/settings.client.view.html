@@ -1,9 +1,9 @@
 <section>
-    <div class="page-header">
-        <h1>Conta</h1>
-    </div>
-    <div class="row" ng-cloak>
-        <!--         <side-nav class="col-sm-3 col-md-3">
+  <div class="page-header">
+    <h1>Conta</h1>
+  </div>
+  <div class="row" ng-cloak>
+    <!--         <side-nav class="col-sm-3 col-md-3">
             <ul class="nav nav-pills nav-stacked">
                 <li ui-sref-active="active">
                     <a ui-sref="settings.profile">Editar Perfil</a>
@@ -13,21 +13,21 @@
                 </li>
             </ul>
         </side-nav> -->
-        <md-sidenav class="col-sm-3 col-md-3" md-component-id="left" md-is-locked-open="true" md-whiteframe="4">
-            <ul class="nav nav-pills md-nav-stacked">
-                <li ui-sref-active="active">
-                    <a ui-sref="settings.profile">Informações</a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="settings.schedules">Planos</a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="settings.password">Redefinir Senha</a>
-                </li>
-            </ul>
-        </md-sidenav>
-        <div class="col-sm-9 col-md-8 settings-view">
-            <div ui-view></div>
-        </div>
+    <md-sidenav class="col-sm-3 col-md-3" md-component-id="left" md-is-locked-open="true" md-whiteframe="4">
+      <div class=" column nav nav-pills ">
+        <li ui-sref-active="active">
+          <a ui-sref="settings.profile">Informações</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="settings.schedules">Planos</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="settings.password">Redefinir Senha</a>
+        </li>
+      </div>
+    </md-sidenav>
+    <div class="col-sm-9 col-md-8 settings-view">
+      <div ui-view></div>
     </div>
+  </div>
 </section>

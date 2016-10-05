@@ -1,45 +1,38 @@
-(function () {
+(function() {
   'use strict';
 
   angular
     .module('users')
     .controller('UserSchedulesController', UserSchedulesController);
 
-  UserSchedulesController.$inject = ['$scope', '$http', 'Authentication'];
+  UserSchedulesController.$inject = ['$http', 'Authentication', 'MyIP'];
 
-  function UserSchedulesController($scope, $http, Authentication) {
+  function UserSchedulesController($http, Authentication, MyIP) {
     var vm = this;
 
-    vm.user = Authentication.user;
-    vm.hasConnectedAdditionalSocialAccounts = hasConnectedAdditionalSocialAccounts;
-    vm.isConnectedSocialAccount = isConnectedSocialAccount;
-    vm.removeUserSocialAccount = removeUserSocialAccount;
+    vm.promise = scheduleUser(Authentication.user.id);
 
-    // Check if there are additional accounts
-    function hasConnectedAdditionalSocialAccounts() {
-      return ($scope.user.additionalProvidersData && Object.keys($scope.user.additionalProvidersData).length);
-    }
+    vm.promise.then(res => {
+    vm.items = res.data.data.objects;
+    })
 
-    // Check if provider is already in use with current user
-    function isConnectedSocialAccount(provider) {
-      return vm.user.provider === provider || (vm.user.additionalProvidersData && vm.user.additionalProvidersData[provider]);
-    }
-
-    // Remove a user social account
-    function removeUserSocialAccount(provider) {
-      vm.success = vm.error = null;
-
-      $http.delete('/api/users/accounts', {
-        params: {
-          provider: provider
-        }
-      }).success(function (response) {
-        // If successful show success message and clear form
-        vm.success = true;
-        vm.user = Authentication.user = response;
-      }).error(function (response) {
-        vm.error = response.message;
+    function scheduleUser(user_id) {
+      // check the remaining time of a user in a schedule
+      var filters = [{
+        'name': 'user_id',
+        'op': 'eq',
+        'val': user_id
+      }];
+      var json = JSON.stringify({
+        'filters': filters
       });
+      var _http = $http.jsonp('http://' + MyIP + ':5000/api/schedule_user?callback=JSON_CALLBACK', {
+        params: {
+          'q': json
+        }
+      });
+      return _http;
     }
   }
+
 }());

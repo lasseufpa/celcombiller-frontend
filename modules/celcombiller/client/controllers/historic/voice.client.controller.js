@@ -23,23 +23,28 @@
 
     vm.historic = vm.filteredHistoric = [];
     vm.filter = filter;
-    vm.options = {'Ligações e Recargas' : 0 , 'Ligações' : 1 ,'Recargas': 2}
+    vm.options = {
+      'Ligações e Recargas': 0,
+      'Ligações': 1,
+      'Recargas': 2
+    }
     vm.selected = 0;
-    
+
     vm.dateEnd = new Date();
     vm.dateBegin = new Date();
     vm.today = new Date();
 
     vm.dateBegin.setMonth(vm.dateBegin.getMonth() - 1)
-    
+
     vm.refreshList = refreshList;
-    
+
     vm.promise = createList();
 
     vm.promise.then(res => {
       vm.historic = vm.filteredHistoric = res.data.data.objects;
     })
-    function refreshList(){
+
+    function refreshList() {
       vm.promise = createList();
 
       vm.promise.then(res => {
@@ -74,13 +79,13 @@
     }
 
     function filter(item) {
-      if (parseInt(vm.selected,10) === 0 ) {
+      if (parseInt(vm.selected, 10) === 0) {
         return 1;
-      } else if (parseInt(vm.selected,10) === 1 && item.to_user_id != null ) {
+      } else if (parseInt(vm.selected, 10) === 1 && item.to_user_id != null) {
         return 1;
-      }else if(parseInt(vm.selected,10) === 2 && item.to_user_id == null ){
+      } else if (parseInt(vm.selected, 10) === 2 && item.to_user_id == null) {
         return 1;
-      }else {
+      } else {
         return 0;
       }
     }
