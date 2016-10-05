@@ -1,0 +1,55 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.title}}</h1>
+  </div>
+  <md-content layout-padding>
+    <div layout-gt-xs="row">
+      <div flex-gt-xs>
+        <h5>Exibir:</h5>
+        <md-input-container class="md-block" flex-gt-sm>
+          <md-select ng-model="vm.selected">
+            <md-option ng-repeat="(opt,value) in vm.options " value="{{value}}">
+              {{opt}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+      <div flex-gt-xs>
+        <h5>De:</h5>
+        <md-datepicker ng-model="vm.dateBegin" ng-change="vm.refreshList()" md-max-date="vm.dateEnd"></md-datepicker>
+      </div>
+      <div flex-gt-xs>
+        <h5>Até:</h5>
+        <md-datepicker ng-model="vm.dateEnd" ng-change="vm.refreshList()" md-min-date="vm.dateBegin" md-max-date="vm.today"></md-datepicker>
+      </div>
+    </div>
+  </md-content>
+  <div class="row">
+    <md-table-container>
+      <table md-table md-progress="vm.promise">
+        <thead md-head md-order="mdorder">
+          <th md-column md-order-by="_id "><span>Id</span></th>
+          <th md-column ><span>Tipo</span></th>
+          <th md-column md-numeric><span>Data</span></th>
+          <th md-column md-numeric><span>Hora</span></th>
+          <th md-column md-numeric><span>Valor/Duração</span></th>
+        </thead>
+        <tbody md-body>
+          <tr md-row ng-repeat="item in vm.filteredHistoric | filter:vm.filter | orderBy: mdorder">
+            <td md-cell>{{item._id}}</td>
+            <td md-cell ng-if="(item.to_user_id == null)"> Recarga</td>
+            <td md-cell ng-if="(item.to_user_id != null)"> Ligação</td>
+            <td md-cell>{{item.date | date : 'd-M-yyyy'}}</td>
+            <td md-cell>{{item.date | date : 'H:m:s'}}</td>
+            <td md-cell ng-if="(item.value < 119) && (item.value >= 0) ">{{item.value |number:2}} Seg.</td>
+            <td md-cell ng-if="(item.value >= 120 ) && (item.value < 7199 )">{{item.value/60 |number:2}} Min.</td>
+            <td md-cell ng-if="(item.value >= 7200)">{{item.value/3600|number:2}} Horas</td>
+            <td md-cell ng-if="(item.value > -119) && (item.value < 0) ">{{item.value |number:2}} Seg.</td>
+            <td md-cell ng-if="(item.value <= -120 ) && (item.value > -7199 )">{{item.value/60 |number:2}} Min.</td>
+            <td md-cell ng-if="(item.value <= -7200)">{{item.value/3600|number:2}} Horas</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </div>
+</section>

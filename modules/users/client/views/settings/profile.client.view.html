@@ -1,0 +1,55 @@
+<section>
+    <div layout-margin>
+        <div layout="row">
+            <div class="info-underline" flex flex-gt-xs>
+                <h4>Nível de Acesso:</h4>
+                <h5 class="info-underline">{{vm.level}} </h5>
+            </div>
+        </div>
+        <div layout-gt-xs="row" layout-align="space-between center">
+            <div class="md-block info-underline" flex-gt-xs>
+                <h4>Nome:</h4>
+                <div>
+                    <h5> {{vm.name}} </h5>
+                </div>
+            </div>
+            <div class="md-block info-underline" flex flex-gt-xs="30">
+                <h4>CPF:</h4>
+                <h5>{{vm.cpf}} </h5>
+            </div>
+        </div>
+        <div class="md-block info-underline" flex-gt-xs>
+            <h4>Endereço:</h4>
+            <h5>{{vm.address}} </h5>
+        </div>
+        <div layout-gt-xs="row" layout-align="space-between center">
+            <div class="md-block info-underline" flex-gt-xs>
+                <h4>Username:</h4>
+                <div>
+                    <h5> {{vm.username}} </h5>
+                </div>
+            </div>
+            <div class="md-block info-underline" flex flex-gt-xs="30">
+                <h4>Número:</h4>
+                <h5>{{vm.clid}} </h5>
+            </div>
+        </div>
+        <div layout-gt-xs="row" layout-align="space-between center">
+            <div class="md-block info-underline" flex-gt-xs>
+                <h4>Saldo de Voz:</h4>
+                <div>
+                    <h5 ng-if="vm.voiceBalance < 119 ">{{vm.voiceBalance |number:2}} Seg.</h5>
+                    <h5 ng-if="(vm.voiceBalance >= 120 ) && (vm.voiceBalance < 7199 )">{{vm.voiceBalance/60 |number:2}} Min.</h5>
+                    <h5 ng-if="vm.voiceBalance  >= 7200 ">{{vm.voiceBalance/3600|number:2}} Horas</h5>
+                </div>
+            </div>
+            <div class="md-block info-underline" flex flex-gt-xs>
+                <h4>Saldo de Dados:</h4>
+                <h5 ng-if="vm.dataBalance  < 2047 ">{{vm.dataBalance | number:2}} B</h5>
+                <h5 ng-if="(vm.dataBalance  >= 2048 ) && (vm.dataBalance  < 2097151) ">{{vm.dataBalance/1024 | number:2}} KB</h5>
+                <h5 ng-if=" vm.dataBalance >= 2097152 && vm.dataBalance < 2147483647 ">{{vm.dataBalance/1048576 | number:2}} MB</h5>
+                <h5 ng-if="vm.dataBalance >= 2147483648 ">{{vm.dataBalance/1073741824 | number:4}} GB</h5>
+            </div>
+        </div>
+    </div>
+</section>

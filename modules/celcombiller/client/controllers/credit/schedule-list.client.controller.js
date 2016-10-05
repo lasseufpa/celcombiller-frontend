@@ -74,11 +74,11 @@
 
       $mdDialog.show(confirm).then(function() {
         // if the user press ok increase the remaing time
-        vm.patchUserSchedule(vm.selected[0]._id, vm.user._id, vm.number + vm.count);
+        vm.patchUserSchedule(vm.selected[0]._id, vm.user._id, vm.number, vm.count);
       }, function() {});
     }
 
-    function patchUserSchedule(schedule_id, user_id, number) {
+    function patchUserSchedule(schedule_id, user_id, number, count) {
       var filters = [{
         'name': 'schedule_id',
         'op': 'eq',
@@ -94,7 +94,8 @@
         'q': {
           'filters': filters
         },
-        'count': number
+        'count': number + count,
+        'number': number
 
       });
 
@@ -201,7 +202,7 @@
             if (err.status === 409) {
               // if the count of remaining month is zero we dont ask.
               if (vm.number === 0) {
-                vm.patchUserSchedule(vm.selected[0]._id, vm.user._id, vm.number + vm.count);
+                vm.patchUserSchedule(vm.selected[0]._id, vm.user._id, vm.number, vm.count);
               } else {
                 vm.checkRemainTime(vm.user._id, vm.selected[0]._id)
                   .then(function(data) {

@@ -9,7 +9,7 @@
 
   function ChangePasswordController($http, Authentication, $mdDialog, $q, MyIP, PatchUserService) {
     var vm = this;
-
+    var patchUserService = PatchUserService;
     vm.user = Authentication.user;
     vm.changeUserPassword = changeUserPassword;
 
@@ -18,7 +18,7 @@
         alertEqual();
         return;
       } else {
-        var _http = PatchUserService(vm.user.username, ['password'], [vm.password1]);
+        var _http = patchUserService(vm.user.username, ['password'], [vm.password1]);
 
         _http.then(function(resp, header) {
           alertOk();

@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('users.admin')
+    .module('celcombiller.admin')
     .run(menuConfig);
 
   menuConfig.$inject = ['menuService'];
