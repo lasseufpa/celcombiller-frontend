@@ -9,11 +9,11 @@ var config = require('../config'),
   cookieParser = require('cookie-parser'),
   passport = require('passport'),
   socketio = require('socket.io'),
-  session = require('express-session'),
-  MongoStore = require('connect-mongo')(session);
+  session = require('express-session');
+  // MongoStore = require('connect-mongo')(session);
 
 // Define the Socket.io configuration method
-module.exports = function (app, db) {
+module.exports = function (app) {
   var server;
   if (config.secure && config.secure.ssl === true) {
     // Load SSL key and certificate
@@ -61,10 +61,10 @@ module.exports = function (app, db) {
   var io = socketio.listen(server);
 
   // Create a MongoDB storage object
-  var mongoStore = new MongoStore({
-    mongooseConnection: db.connection,
-    collection: config.sessionCollection
-  });
+  // var mongoStore = new MongoStore({
+  //   mongooseConnection: db.connection,
+  //   collection: config.sessionCollection
+  // });
 
   // Intercept Socket.io's handshake request
   io.use(function (socket, next) {
@@ -76,24 +76,24 @@ module.exports = function (app, db) {
       if (!sessionId) return next(new Error('sessionId was not found in socket.request'), false);
 
       // Use the mongoStorage instance to get the Express session information
-      mongoStore.get(sessionId, function (err, session) {
-        if (err) return next(err, false);
-        if (!session) return next(new Error('session was not found for ' + sessionId), false);
-
-        // Set the Socket.io session information
-        socket.request.session = session;
-
-        // Use Passport to populate the user details
-        passport.initialize()(socket.request, {}, function () {
-          passport.session()(socket.request, {}, function () {
-            if (socket.request.user) {
-              next(null, true);
-            } else {
-              next(new Error('User is not authenticated'), false);
-            }
-          });
-        });
-      });
+      // mongoStore.get(sessionId, function (err, session) {
+      //   if (err) return next(err, false);
+      //   if (!session) return next(new Error('session was not found for ' + sessionId), false);
+      //
+      //   // Set the Socket.io session information
+      //   socket.request.session = session;
+      //
+      //   // Use Passport to populate the user details
+      //   passport.initialize()(socket.request, {}, function () {
+      //     passport.session()(socket.request, {}, function () {
+      //       if (socket.request.user) {
+      //         next(null, true);
+      //       } else {
+      //         next(new Error('User is not authenticated'), false);
+      //       }
+      //     });
+      //   });
+      // });
     });
   });
 
