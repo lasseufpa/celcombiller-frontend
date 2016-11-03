@@ -8,7 +8,7 @@
 # docker-compose up -d
 
 FROM ubuntu:latest
-MAINTAINER MEAN.JS
+MAINTAINER jvnsoares@gmail.com
 
 # Install Utilities
 RUN apt-get update -q

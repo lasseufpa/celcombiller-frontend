@@ -11,7 +11,6 @@
     var vm = this;
     vm.authentication = Authentication;
 
-    vm.test1 = vm.authentication;
     if (vm.authentication.user.length === 0)
       vm.name = '';
     else

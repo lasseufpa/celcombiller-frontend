@@ -9,7 +9,10 @@
 
   // Configuring the Users module
   function menuConfig(menuService) {
-
+    menuService.addMenuItem('topbar', {
+      title: 'Enviar SMS',
+      state: 'sms',
+      roles: ['admin', 'coll','user']
+    });
   }
 }());
-

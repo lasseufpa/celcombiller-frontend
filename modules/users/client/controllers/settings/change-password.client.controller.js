@@ -5,9 +5,9 @@
     .module('users')
     .controller('ChangePasswordController', ChangePasswordController);
 
-  ChangePasswordController.$inject = ['$http', 'Authentication', '$mdDialog', '$q', 'MyIP', 'PatchUserService'];
+  ChangePasswordController.$inject = ['Authentication', '$mdDialog', '$q', 'MyIP', 'PatchUserService'];
 
-  function ChangePasswordController($http, Authentication, $mdDialog, $q, MyIP, PatchUserService) {
+  function ChangePasswordController(Authentication, $mdDialog, $q, MyIP, PatchUserService) {
     var vm = this;
     var patchUserService = PatchUserService;
     vm.user = Authentication.user;

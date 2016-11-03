@@ -48,6 +48,15 @@
           pageTitle: 'Planos'
         }
       })
+      .state('sms', {
+        url: '/sms',
+        templateUrl: 'modules/users/client/views/sms.client.view.html',
+        controller: 'SmsController',
+        controllerAs: 'vm',
+        data: {
+          roles: ['user', 'admin']
+        }
+      })
       // .state('settings.picture', {
       //   url: '/picture',
       //   templateUrl: 'modules/users/client/views/settings/change-profile-picture.client.view.html',
